@@ -24,9 +24,9 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
     @Override
     public User login(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_name", user.getUserName());
-
-        return userMapper.selectOne(queryWrapper);
+        queryWrapper.eq("user_code", user.getUserName());
+        User user1 = userMapper.selectOne(queryWrapper);
+        return user1;
     }
 }
 
