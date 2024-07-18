@@ -20,13 +20,5 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/login")
-    public Result login(User user) {
-        User login = userService.login(user);
-        if (login == null) {
-            return Result.error("登录失败");
-        }
-        String jwt = JWTUtils.createJWT(JSONUtils.toJSON(login));
-        return Result.success(jwt);
-    }
+
 }

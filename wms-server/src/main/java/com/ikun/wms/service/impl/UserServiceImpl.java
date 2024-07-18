@@ -7,6 +7,8 @@ import com.ikun.wms.pojo.entity.User;
 import com.ikun.wms.mapper.UserInfoMapper;
 import com.ikun.wms.service.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,11 +24,15 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
     private UserInfoMapper userMapper;
 
     @Override
-    public User login(User user) {
+    public User findByUserName(String username) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_code", user.getUserName());
-        User user1 = userMapper.selectOne(queryWrapper);
-        return user1;
+        queryWrapper.eq("user_code", username);
+        return userMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return findByUserName(username);
     }
 }
 
