@@ -1,20 +1,24 @@
 package com.ikun.wms.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
-
-import com.alibaba.fastjson2.annotation.JSONField;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
  * 用户表
  * @TableName user_info
  */
+@TableName(value ="user_info")
 @Data
 public class User implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Integer userId;
 
     /**
@@ -55,8 +59,7 @@ public class User implements Serializable {
     /**
      * 
      */
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 
@@ -66,8 +69,8 @@ public class User implements Serializable {
     /**
      * 
      */
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
-    private static final long serialVersionUID = 6595119121277161460L;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }

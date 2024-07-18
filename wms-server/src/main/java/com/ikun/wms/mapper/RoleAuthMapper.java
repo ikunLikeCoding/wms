@@ -1,25 +1,18 @@
 package com.ikun.wms.mapper;
 
 import com.ikun.wms.pojo.entity.RoleAuth;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
 * @author yiwan
 * @description 针对表【role_auth(角色权限表)】的数据库操作Mapper
-* @createDate 2024-07-18 11:22:49
+* @createDate 2024-07-18 16:23:43
 * @Entity com.ikun.wms.pojo.entity.RoleAuth
 */
-public interface RoleAuthMapper {
-
-    int deleteByPrimaryKey(Long id);
-
-    int insert(RoleAuth record);
-
-    int insertSelective(RoleAuth record);
-
-    RoleAuth selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(RoleAuth record);
-
-    int updateByPrimaryKey(RoleAuth record);
+public interface RoleAuthMapper extends BaseMapper<RoleAuth> {
 
 }
+
+
+
+

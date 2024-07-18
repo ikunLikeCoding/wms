@@ -1,18 +1,24 @@
 package com.ikun.wms.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
  * 权限表
  * @TableName auth_info
  */
+@TableName(value ="auth_info")
 @Data
 public class AuthInfo implements Serializable {
     /**
      * 
      */
+    @TableId(type = IdType.AUTO)
     private Integer authId;
 
     /**
@@ -68,7 +74,7 @@ public class AuthInfo implements Serializable {
     /**
      * 
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 
@@ -78,7 +84,8 @@ public class AuthInfo implements Serializable {
     /**
      * 
      */
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
+    @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

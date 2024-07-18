@@ -19,9 +19,7 @@ import java.io.IOException;
 public class TokenVerifyFilter extends OncePerRequestFilter {
 
 
-    //springboot中自带的线程池
-    @Resource
-    private ThreadPoolTaskExecutor taskExecutor;
+
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,@NonNull HttpServletResponse response,@NonNull FilterChain filterChain) throws ServletException, IOException {

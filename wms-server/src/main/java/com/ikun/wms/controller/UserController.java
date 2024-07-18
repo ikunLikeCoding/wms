@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/login")
     public Result login(User user) {
-        User login = userService.login(user.getUserName(), user.getUserPwd());
+        User login = userService.login(user);
         if (login == null) {
             return Result.error("登录失败");
         }
