@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.OutStoreMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.OutStore">
+            <id property="outsId" column="outs_id" jdbcType="INTEGER"/>
+            <result property="productId" column="product_id" jdbcType="INTEGER"/>
+            <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+            <result property="tallyId" column="tally_id" jdbcType="INTEGER"/>
+            <result property="outPrice" column="out_price" jdbcType="DECIMAL"/>
+            <result property="outNum" column="out_num" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="isOut" column="is_out" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        outs_id,product_id,store_id,
+        tally_id,out_price,out_num,
+        create_by,create_time,is_out
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from out_store
+        where  outs_id = #{outsId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from out_store
+        where  outs_id = #{outsId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="outs_id" keyProperty="outsId" parameterType="com.ikun.wms.pojo.entity.OutStore" useGeneratedKeys="true">
+        insert into out_store
+        ( outs_id,product_id,store_id
+        ,tally_id,out_price,out_num
+        ,create_by,create_time,is_out
+        )
+        values (#{outsId,jdbcType=INTEGER},#{productId,jdbcType=INTEGER},#{storeId,jdbcType=INTEGER}
+        ,#{tallyId,jdbcType=INTEGER},#{outPrice,jdbcType=DECIMAL},#{outNum,jdbcType=INTEGER}
+        ,#{createBy,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},#{isOut,jdbcType=CHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="outs_id" keyProperty="outsId" parameterType="com.ikun.wms.pojo.entity.OutStore" useGeneratedKeys="true">
+        insert into out_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="outsId != null">outs_id,</if>
+                <if test="productId != null">product_id,</if>
+                <if test="storeId != null">store_id,</if>
+                <if test="tallyId != null">tally_id,</if>
+                <if test="outPrice != null">out_price,</if>
+                <if test="outNum != null">out_num,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="isOut != null">is_out,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="outsId != null">#{outsId,jdbcType=INTEGER},</if>
+                <if test="productId != null">#{productId,jdbcType=INTEGER},</if>
+                <if test="storeId != null">#{storeId,jdbcType=INTEGER},</if>
+                <if test="tallyId != null">#{tallyId,jdbcType=INTEGER},</if>
+                <if test="outPrice != null">#{outPrice,jdbcType=DECIMAL},</if>
+                <if test="outNum != null">#{outNum,jdbcType=INTEGER},</if>
+                <if test="createBy != null">#{createBy,jdbcType=INTEGER},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="isOut != null">#{isOut,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.OutStore">
+        update out_store
+        <set>
+                <if test="productId != null">
+                    product_id = #{productId,jdbcType=INTEGER},
+                </if>
+                <if test="storeId != null">
+                    store_id = #{storeId,jdbcType=INTEGER},
+                </if>
+                <if test="tallyId != null">
+                    tally_id = #{tallyId,jdbcType=INTEGER},
+                </if>
+                <if test="outPrice != null">
+                    out_price = #{outPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="outNum != null">
+                    out_num = #{outNum,jdbcType=INTEGER},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isOut != null">
+                    is_out = #{isOut,jdbcType=CHAR},
+                </if>
+        </set>
+        where   outs_id = #{outsId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.OutStore">
+        update out_store
+        set 
+            product_id =  #{productId,jdbcType=INTEGER},
+            store_id =  #{storeId,jdbcType=INTEGER},
+            tally_id =  #{tallyId,jdbcType=INTEGER},
+            out_price =  #{outPrice,jdbcType=DECIMAL},
+            out_num =  #{outNum,jdbcType=INTEGER},
+            create_by =  #{createBy,jdbcType=INTEGER},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            is_out =  #{isOut,jdbcType=CHAR}
+        where   outs_id = #{outsId,jdbcType=INTEGER} 
+    </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.SupplyMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.Supply">
+            <id property="supplyId" column="supply_id" jdbcType="INTEGER"/>
+            <result property="supplyNum" column="supply_num" jdbcType="VARCHAR"/>
+            <result property="supplyName" column="supply_name" jdbcType="VARCHAR"/>
+            <result property="supplyIntroduce" column="supply_introduce" jdbcType="VARCHAR"/>
+            <result property="concat" column="concat" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="address" column="address" jdbcType="VARCHAR"/>
+            <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        supply_id,supply_num,supply_name,
+        supply_introduce,concat,phone,
+        address,is_delete
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from supply
+        where  supply_id = #{supplyId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from supply
+        where  supply_id = #{supplyId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="supply_id" keyProperty="supplyId" parameterType="com.ikun.wms.pojo.entity.Supply" useGeneratedKeys="true">
+        insert into supply
+        ( supply_id,supply_num,supply_name
+        ,supply_introduce,concat,phone
+        ,address,is_delete)
+        values (#{supplyId,jdbcType=INTEGER},#{supplyNum,jdbcType=VARCHAR},#{supplyName,jdbcType=VARCHAR}
+        ,#{supplyIntroduce,jdbcType=VARCHAR},#{concat,jdbcType=VARCHAR},#{phone,jdbcType=VARCHAR}
+        ,#{address,jdbcType=VARCHAR},#{isDelete,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="supply_id" keyProperty="supplyId" parameterType="com.ikun.wms.pojo.entity.Supply" useGeneratedKeys="true">
+        insert into supply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="supplyId != null">supply_id,</if>
+                <if test="supplyNum != null">supply_num,</if>
+                <if test="supplyName != null">supply_name,</if>
+                <if test="supplyIntroduce != null">supply_introduce,</if>
+                <if test="concat != null">concat,</if>
+                <if test="phone != null">phone,</if>
+                <if test="address != null">address,</if>
+                <if test="isDelete != null">is_delete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="supplyId != null">#{supplyId,jdbcType=INTEGER},</if>
+                <if test="supplyNum != null">#{supplyNum,jdbcType=VARCHAR},</if>
+                <if test="supplyName != null">#{supplyName,jdbcType=VARCHAR},</if>
+                <if test="supplyIntroduce != null">#{supplyIntroduce,jdbcType=VARCHAR},</if>
+                <if test="concat != null">#{concat,jdbcType=VARCHAR},</if>
+                <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
+                <if test="address != null">#{address,jdbcType=VARCHAR},</if>
+                <if test="isDelete != null">#{isDelete,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.Supply">
+        update supply
+        <set>
+                <if test="supplyNum != null">
+                    supply_num = #{supplyNum,jdbcType=VARCHAR},
+                </if>
+                <if test="supplyName != null">
+                    supply_name = #{supplyName,jdbcType=VARCHAR},
+                </if>
+                <if test="supplyIntroduce != null">
+                    supply_introduce = #{supplyIntroduce,jdbcType=VARCHAR},
+                </if>
+                <if test="concat != null">
+                    concat = #{concat,jdbcType=VARCHAR},
+                </if>
+                <if test="phone != null">
+                    phone = #{phone,jdbcType=VARCHAR},
+                </if>
+                <if test="address != null">
+                    address = #{address,jdbcType=VARCHAR},
+                </if>
+                <if test="isDelete != null">
+                    is_delete = #{isDelete,jdbcType=CHAR},
+                </if>
+        </set>
+        where   supply_id = #{supplyId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.Supply">
+        update supply
+        set 
+            supply_num =  #{supplyNum,jdbcType=VARCHAR},
+            supply_name =  #{supplyName,jdbcType=VARCHAR},
+            supply_introduce =  #{supplyIntroduce,jdbcType=VARCHAR},
+            concat =  #{concat,jdbcType=VARCHAR},
+            phone =  #{phone,jdbcType=VARCHAR},
+            address =  #{address,jdbcType=VARCHAR},
+            is_delete =  #{isDelete,jdbcType=CHAR}
+        where   supply_id = #{supplyId,jdbcType=INTEGER} 
+    </update>
+</mapper>

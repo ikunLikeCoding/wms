@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.Product">
+            <id property="productId" column="product_id" jdbcType="INTEGER"/>
+            <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+            <result property="brandId" column="brand_id" jdbcType="INTEGER"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="productNum" column="product_num" jdbcType="VARCHAR"/>
+            <result property="productInvent" column="product_invent" jdbcType="INTEGER"/>
+            <result property="typeId" column="type_id" jdbcType="INTEGER"/>
+            <result property="supplyId" column="supply_id" jdbcType="INTEGER"/>
+            <result property="placeId" column="place_id" jdbcType="INTEGER"/>
+            <result property="unitId" column="unit_id" jdbcType="INTEGER"/>
+            <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+            <result property="upDownState" column="up_down_state" jdbcType="CHAR"/>
+            <result property="inPrice" column="in_price" jdbcType="DECIMAL"/>
+            <result property="salePrice" column="sale_price" jdbcType="DECIMAL"/>
+            <result property="memPrice" column="mem_price" jdbcType="DECIMAL"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+            <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
+            <result property="imgs" column="imgs" jdbcType="VARCHAR"/>
+            <result property="productDate" column="product_date" jdbcType="TIMESTAMP"/>
+            <result property="suppDate" column="supp_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        product_id,store_id,brand_id,
+        product_name,product_num,product_invent,
+        type_id,supply_id,place_id,
+        unit_id,introduce,up_down_state,
+        in_price,sale_price,mem_price,
+        create_time,update_time,create_by,
+        update_by,imgs,product_date,
+        supp_date
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from product
+        where  product_id = #{productId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from product
+        where  product_id = #{productId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="product_id" keyProperty="productId" parameterType="com.ikun.wms.pojo.entity.Product" useGeneratedKeys="true">
+        insert into product
+        ( product_id,store_id,brand_id
+        ,product_name,product_num,product_invent
+        ,type_id,supply_id,place_id
+        ,unit_id,introduce,up_down_state
+        ,in_price,sale_price,mem_price
+        ,create_time,update_time,create_by
+        ,update_by,imgs,product_date
+        ,supp_date)
+        values (#{productId,jdbcType=INTEGER},#{storeId,jdbcType=INTEGER},#{brandId,jdbcType=INTEGER}
+        ,#{productName,jdbcType=VARCHAR},#{productNum,jdbcType=VARCHAR},#{productInvent,jdbcType=INTEGER}
+        ,#{typeId,jdbcType=INTEGER},#{supplyId,jdbcType=INTEGER},#{placeId,jdbcType=INTEGER}
+        ,#{unitId,jdbcType=INTEGER},#{introduce,jdbcType=VARCHAR},#{upDownState,jdbcType=CHAR}
+        ,#{inPrice,jdbcType=DECIMAL},#{salePrice,jdbcType=DECIMAL},#{memPrice,jdbcType=DECIMAL}
+        ,#{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP},#{createBy,jdbcType=INTEGER}
+        ,#{updateBy,jdbcType=INTEGER},#{imgs,jdbcType=VARCHAR},#{productDate,jdbcType=TIMESTAMP}
+        ,#{suppDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="product_id" keyProperty="productId" parameterType="com.ikun.wms.pojo.entity.Product" useGeneratedKeys="true">
+        insert into product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="productId != null">product_id,</if>
+                <if test="storeId != null">store_id,</if>
+                <if test="brandId != null">brand_id,</if>
+                <if test="productName != null">product_name,</if>
+                <if test="productNum != null">product_num,</if>
+                <if test="productInvent != null">product_invent,</if>
+                <if test="typeId != null">type_id,</if>
+                <if test="supplyId != null">supply_id,</if>
+                <if test="placeId != null">place_id,</if>
+                <if test="unitId != null">unit_id,</if>
+                <if test="introduce != null">introduce,</if>
+                <if test="upDownState != null">up_down_state,</if>
+                <if test="inPrice != null">in_price,</if>
+                <if test="salePrice != null">sale_price,</if>
+                <if test="memPrice != null">mem_price,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="updateBy != null">update_by,</if>
+                <if test="imgs != null">imgs,</if>
+                <if test="productDate != null">product_date,</if>
+                <if test="suppDate != null">supp_date,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="productId != null">#{productId,jdbcType=INTEGER},</if>
+                <if test="storeId != null">#{storeId,jdbcType=INTEGER},</if>
+                <if test="brandId != null">#{brandId,jdbcType=INTEGER},</if>
+                <if test="productName != null">#{productName,jdbcType=VARCHAR},</if>
+                <if test="productNum != null">#{productNum,jdbcType=VARCHAR},</if>
+                <if test="productInvent != null">#{productInvent,jdbcType=INTEGER},</if>
+                <if test="typeId != null">#{typeId,jdbcType=INTEGER},</if>
+                <if test="supplyId != null">#{supplyId,jdbcType=INTEGER},</if>
+                <if test="placeId != null">#{placeId,jdbcType=INTEGER},</if>
+                <if test="unitId != null">#{unitId,jdbcType=INTEGER},</if>
+                <if test="introduce != null">#{introduce,jdbcType=VARCHAR},</if>
+                <if test="upDownState != null">#{upDownState,jdbcType=CHAR},</if>
+                <if test="inPrice != null">#{inPrice,jdbcType=DECIMAL},</if>
+                <if test="salePrice != null">#{salePrice,jdbcType=DECIMAL},</if>
+                <if test="memPrice != null">#{memPrice,jdbcType=DECIMAL},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+                <if test="createBy != null">#{createBy,jdbcType=INTEGER},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=INTEGER},</if>
+                <if test="imgs != null">#{imgs,jdbcType=VARCHAR},</if>
+                <if test="productDate != null">#{productDate,jdbcType=TIMESTAMP},</if>
+                <if test="suppDate != null">#{suppDate,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.Product">
+        update product
+        <set>
+                <if test="storeId != null">
+                    store_id = #{storeId,jdbcType=INTEGER},
+                </if>
+                <if test="brandId != null">
+                    brand_id = #{brandId,jdbcType=INTEGER},
+                </if>
+                <if test="productName != null">
+                    product_name = #{productName,jdbcType=VARCHAR},
+                </if>
+                <if test="productNum != null">
+                    product_num = #{productNum,jdbcType=VARCHAR},
+                </if>
+                <if test="productInvent != null">
+                    product_invent = #{productInvent,jdbcType=INTEGER},
+                </if>
+                <if test="typeId != null">
+                    type_id = #{typeId,jdbcType=INTEGER},
+                </if>
+                <if test="supplyId != null">
+                    supply_id = #{supplyId,jdbcType=INTEGER},
+                </if>
+                <if test="placeId != null">
+                    place_id = #{placeId,jdbcType=INTEGER},
+                </if>
+                <if test="unitId != null">
+                    unit_id = #{unitId,jdbcType=INTEGER},
+                </if>
+                <if test="introduce != null">
+                    introduce = #{introduce,jdbcType=VARCHAR},
+                </if>
+                <if test="upDownState != null">
+                    up_down_state = #{upDownState,jdbcType=CHAR},
+                </if>
+                <if test="inPrice != null">
+                    in_price = #{inPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="salePrice != null">
+                    sale_price = #{salePrice,jdbcType=DECIMAL},
+                </if>
+                <if test="memPrice != null">
+                    mem_price = #{memPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=INTEGER},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=INTEGER},
+                </if>
+                <if test="imgs != null">
+                    imgs = #{imgs,jdbcType=VARCHAR},
+                </if>
+                <if test="productDate != null">
+                    product_date = #{productDate,jdbcType=TIMESTAMP},
+                </if>
+                <if test="suppDate != null">
+                    supp_date = #{suppDate,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   product_id = #{productId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.Product">
+        update product
+        set 
+            store_id =  #{storeId,jdbcType=INTEGER},
+            brand_id =  #{brandId,jdbcType=INTEGER},
+            product_name =  #{productName,jdbcType=VARCHAR},
+            product_num =  #{productNum,jdbcType=VARCHAR},
+            product_invent =  #{productInvent,jdbcType=INTEGER},
+            type_id =  #{typeId,jdbcType=INTEGER},
+            supply_id =  #{supplyId,jdbcType=INTEGER},
+            place_id =  #{placeId,jdbcType=INTEGER},
+            unit_id =  #{unitId,jdbcType=INTEGER},
+            introduce =  #{introduce,jdbcType=VARCHAR},
+            up_down_state =  #{upDownState,jdbcType=CHAR},
+            in_price =  #{inPrice,jdbcType=DECIMAL},
+            sale_price =  #{salePrice,jdbcType=DECIMAL},
+            mem_price =  #{memPrice,jdbcType=DECIMAL},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP},
+            create_by =  #{createBy,jdbcType=INTEGER},
+            update_by =  #{updateBy,jdbcType=INTEGER},
+            imgs =  #{imgs,jdbcType=VARCHAR},
+            product_date =  #{productDate,jdbcType=TIMESTAMP},
+            supp_date =  #{suppDate,jdbcType=TIMESTAMP}
+        where   product_id = #{productId,jdbcType=INTEGER} 
+    </update>
+</mapper>

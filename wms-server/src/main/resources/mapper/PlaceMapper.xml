@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.PlaceMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.Place">
+            <id property="placeId" column="place_id" jdbcType="INTEGER"/>
+            <result property="placeName" column="place_name" jdbcType="VARCHAR"/>
+            <result property="placeNum" column="place_num" jdbcType="VARCHAR"/>
+            <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+            <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        place_id,place_name,place_num,
+        introduce,is_delete
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from place
+        where  place_id = #{placeId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from place
+        where  place_id = #{placeId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="place_id" keyProperty="placeId" parameterType="com.ikun.wms.pojo.entity.Place" useGeneratedKeys="true">
+        insert into place
+        ( place_id,place_name,place_num
+        ,introduce,is_delete)
+        values (#{placeId,jdbcType=INTEGER},#{placeName,jdbcType=VARCHAR},#{placeNum,jdbcType=VARCHAR}
+        ,#{introduce,jdbcType=VARCHAR},#{isDelete,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="place_id" keyProperty="placeId" parameterType="com.ikun.wms.pojo.entity.Place" useGeneratedKeys="true">
+        insert into place
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="placeId != null">place_id,</if>
+                <if test="placeName != null">place_name,</if>
+                <if test="placeNum != null">place_num,</if>
+                <if test="introduce != null">introduce,</if>
+                <if test="isDelete != null">is_delete,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="placeId != null">#{placeId,jdbcType=INTEGER},</if>
+                <if test="placeName != null">#{placeName,jdbcType=VARCHAR},</if>
+                <if test="placeNum != null">#{placeNum,jdbcType=VARCHAR},</if>
+                <if test="introduce != null">#{introduce,jdbcType=VARCHAR},</if>
+                <if test="isDelete != null">#{isDelete,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.Place">
+        update place
+        <set>
+                <if test="placeName != null">
+                    place_name = #{placeName,jdbcType=VARCHAR},
+                </if>
+                <if test="placeNum != null">
+                    place_num = #{placeNum,jdbcType=VARCHAR},
+                </if>
+                <if test="introduce != null">
+                    introduce = #{introduce,jdbcType=VARCHAR},
+                </if>
+                <if test="isDelete != null">
+                    is_delete = #{isDelete,jdbcType=CHAR},
+                </if>
+        </set>
+        where   place_id = #{placeId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.Place">
+        update place
+        set 
+            place_name =  #{placeName,jdbcType=VARCHAR},
+            place_num =  #{placeNum,jdbcType=VARCHAR},
+            introduce =  #{introduce,jdbcType=VARCHAR},
+            is_delete =  #{isDelete,jdbcType=CHAR}
+        where   place_id = #{placeId,jdbcType=INTEGER} 
+    </update>
+</mapper>

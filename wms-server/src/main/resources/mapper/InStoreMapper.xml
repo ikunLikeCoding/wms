@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.InStoreMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.InStore">
+            <id property="insId" column="ins_id" jdbcType="INTEGER"/>
+            <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+            <result property="productId" column="product_id" jdbcType="INTEGER"/>
+            <result property="inNum" column="in_num" jdbcType="INTEGER"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="isIn" column="is_in" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ins_id,store_id,product_id,
+        in_num,create_by,create_time,
+        is_in
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from in_store
+        where  ins_id = #{insId,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from in_store
+        where  ins_id = #{insId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="ins_id" keyProperty="insId" parameterType="com.ikun.wms.pojo.entity.InStore" useGeneratedKeys="true">
+        insert into in_store
+        ( ins_id,store_id,product_id
+        ,in_num,create_by,create_time
+        ,is_in)
+        values (#{insId,jdbcType=INTEGER},#{storeId,jdbcType=INTEGER},#{productId,jdbcType=INTEGER}
+        ,#{inNum,jdbcType=INTEGER},#{createBy,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP}
+        ,#{isIn,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="ins_id" keyProperty="insId" parameterType="com.ikun.wms.pojo.entity.InStore" useGeneratedKeys="true">
+        insert into in_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="insId != null">ins_id,</if>
+                <if test="storeId != null">store_id,</if>
+                <if test="productId != null">product_id,</if>
+                <if test="inNum != null">in_num,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="isIn != null">is_in,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="insId != null">#{insId,jdbcType=INTEGER},</if>
+                <if test="storeId != null">#{storeId,jdbcType=INTEGER},</if>
+                <if test="productId != null">#{productId,jdbcType=INTEGER},</if>
+                <if test="inNum != null">#{inNum,jdbcType=INTEGER},</if>
+                <if test="createBy != null">#{createBy,jdbcType=INTEGER},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="isIn != null">#{isIn,jdbcType=CHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.InStore">
+        update in_store
+        <set>
+                <if test="storeId != null">
+                    store_id = #{storeId,jdbcType=INTEGER},
+                </if>
+                <if test="productId != null">
+                    product_id = #{productId,jdbcType=INTEGER},
+                </if>
+                <if test="inNum != null">
+                    in_num = #{inNum,jdbcType=INTEGER},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="isIn != null">
+                    is_in = #{isIn,jdbcType=CHAR},
+                </if>
+        </set>
+        where   ins_id = #{insId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.InStore">
+        update in_store
+        set 
+            store_id =  #{storeId,jdbcType=INTEGER},
+            product_id =  #{productId,jdbcType=INTEGER},
+            in_num =  #{inNum,jdbcType=INTEGER},
+            create_by =  #{createBy,jdbcType=INTEGER},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            is_in =  #{isIn,jdbcType=CHAR}
+        where   ins_id = #{insId,jdbcType=INTEGER} 
+    </update>
+</mapper>

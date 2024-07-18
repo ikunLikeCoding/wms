@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ikun.wms.mapper.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.User">
+            <id property="userId" column="user_id" jdbcType="INTEGER"/>
+            <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+            <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+            <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
+            <result property="userType" column="user_type" jdbcType="CHAR"/>
+            <result property="userState" column="user_state" jdbcType="CHAR"/>
+            <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+            <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,user_code,user_name,
+        user_pwd,user_type,user_state,
+        is_delete,create_by,create_time,
+        update_by,update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_info
+        where  user_id = #{userId,jdbcType=INTEGER} 
+    </select>
+    <select id="getUserByName" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+            from user_info where user_name = #{userName}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_info
+        where  user_id = #{userId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="user_id" keyProperty="userId" parameterType="com.ikun.wms.pojo.entity.User" useGeneratedKeys="true">
+        insert into user_info
+        ( user_id,user_code,user_name
+        ,user_pwd,user_type,user_state
+        ,is_delete,create_by,create_time
+        ,update_by,update_time)
+        values (#{userId,jdbcType=INTEGER},#{userCode,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}
+        ,#{userPwd,jdbcType=VARCHAR},#{userType,jdbcType=CHAR},#{userState,jdbcType=CHAR}
+        ,#{isDelete,jdbcType=CHAR},#{createBy,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP}
+        ,#{updateBy,jdbcType=INTEGER},#{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="user_id" keyProperty="userId" parameterType="com.ikun.wms.pojo.entity.User" useGeneratedKeys="true">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userId != null">user_id,</if>
+                <if test="userCode != null">user_code,</if>
+                <if test="userName != null">user_name,</if>
+                <if test="userPwd != null">user_pwd,</if>
+                <if test="userType != null">user_type,</if>
+                <if test="userState != null">user_state,</if>
+                <if test="isDelete != null">is_delete,</if>
+                <if test="createBy != null">create_by,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateBy != null">update_by,</if>
+                <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userId != null">#{userId,jdbcType=INTEGER},</if>
+                <if test="userCode != null">#{userCode,jdbcType=VARCHAR},</if>
+                <if test="userName != null">#{userName,jdbcType=VARCHAR},</if>
+                <if test="userPwd != null">#{userPwd,jdbcType=VARCHAR},</if>
+                <if test="userType != null">#{userType,jdbcType=CHAR},</if>
+                <if test="userState != null">#{userState,jdbcType=CHAR},</if>
+                <if test="isDelete != null">#{isDelete,jdbcType=CHAR},</if>
+                <if test="createBy != null">#{createBy,jdbcType=INTEGER},</if>
+                <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+                <if test="updateBy != null">#{updateBy,jdbcType=INTEGER},</if>
+                <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ikun.wms.pojo.entity.User">
+        update user_info
+        <set>
+                <if test="userCode != null">
+                    user_code = #{userCode,jdbcType=VARCHAR},
+                </if>
+                <if test="userName != null">
+                    user_name = #{userName,jdbcType=VARCHAR},
+                </if>
+                <if test="userPwd != null">
+                    user_pwd = #{userPwd,jdbcType=VARCHAR},
+                </if>
+                <if test="userType != null">
+                    user_type = #{userType,jdbcType=CHAR},
+                </if>
+                <if test="userState != null">
+                    user_state = #{userState,jdbcType=CHAR},
+                </if>
+                <if test="isDelete != null">
+                    is_delete = #{isDelete,jdbcType=CHAR},
+                </if>
+                <if test="createBy != null">
+                    create_by = #{createBy,jdbcType=INTEGER},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateBy != null">
+                    update_by = #{updateBy,jdbcType=INTEGER},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   user_id = #{userId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ikun.wms.pojo.entity.User">
+        update user_info
+        set 
+            user_code =  #{userCode,jdbcType=VARCHAR},
+            user_name =  #{userName,jdbcType=VARCHAR},
+            user_pwd =  #{userPwd,jdbcType=VARCHAR},
+            user_type =  #{userType,jdbcType=CHAR},
+            user_state =  #{userState,jdbcType=CHAR},
+            is_delete =  #{isDelete,jdbcType=CHAR},
+            create_by =  #{createBy,jdbcType=INTEGER},
+            create_time =  #{createTime,jdbcType=TIMESTAMP},
+            update_by =  #{updateBy,jdbcType=INTEGER},
+            update_time =  #{updateTime,jdbcType=TIMESTAMP}
+        where   user_id = #{userId,jdbcType=INTEGER} 
+    </update>
+</mapper>
