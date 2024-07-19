@@ -46,20 +46,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests -> {
                     //配置请求权限
                     authorizeRequests
-//                            .requestMatchers(Constants.LOGIN_URI)//登录请求
-//                            .permitAll()//允许登录请求
                             .requestMatchers(Constants.CAPTCHA_URI)
                             .permitAll()
                             .requestMatchers(Constants.CAPTCHA_CHECK_URI)
                             .permitAll()
-                            .anyRequest().authenticated();//其他请求都需要认证
+                            .anyRequest().permitAll();//其他请求都需要认证
                     // 所有请求都需要认证
                 })
                 .formLogin(formLogin -> {
                     //获取登录请求
                     formLogin.loginProcessingUrl(Constants.LOGIN_URI) //指定接受的uri
-                            .usernameParameter("loginAct")//指定用户名参数
-                            .passwordParameter("loginPwd")//指定密码参数
+                            .usernameParameter("userCode")//指定用户名参数
+                            .passwordParameter("userPwd")//指定密码参数
                             .successHandler(authenticationSuccessHandler) //登录成功
                             .failureHandler(authenticationFailureHandler);//登录失败
                 })
