@@ -5,6 +5,9 @@ import com.alibaba.fastjson2.JSONWriter;
 import com.alibaba.fastjson2.support.config.FastJsonConfig;
 import com.alibaba.fastjson2.support.spring6.data.redis.GenericFastJsonRedisSerializer;
 import com.alibaba.fastjson2.support.spring6.http.converter.FastJsonHttpMessageConverter;
+import com.google.code.kaptcha.Producer;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Properties;
 
 @Configuration
 public class ConfigBean {
@@ -63,5 +67,22 @@ public class ConfigBean {
     @Bean//加密
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean(name = "captchaProducer")
+    public Producer captchaProducer() {
+        DefaultKaptcha kaptcha = new DefaultKaptcha();
+
+        Properties props = new Properties();
+        // 自定义配置
+        props.setProperty("kaptcha.textproducer.font.names", "Arial, Courier");
+        props.setProperty("kaptcha.textproducer.char.length", "4");
+        props.setProperty("kaptcha.image.width","120");
+        props.setProperty("kaptcha.image.height","45");
+        // 更多配置项...
+
+        Config config = new Config(props);
+        kaptcha.setConfig(config);
+        return kaptcha;
     }
 }

@@ -9,7 +9,7 @@ spring:
     password: gyw123...
   mvc:
     servlet:
-      path: /wms
+      path: /wms/api
 
 
 mybatis-plus:

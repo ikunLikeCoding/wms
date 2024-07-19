@@ -25,14 +25,18 @@ public class TokenVerifyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,@NonNull HttpServletResponse response,@NonNull FilterChain filterChain) throws ServletException, IOException {
-        if(request.getRequestURI().equals(Constants.LOGIN_URI)){
+//        System.out.println(request.getRequestURI());
+        if(request.getRequestURI().equals(Constants.LOGIN_URI)||
+                request.getRequestURI().equals(Constants.CAPTCHA_CHECK_URI)||
+                request.getRequestURI().equals(Constants.CAPTCHA_URI)){
             filterChain.doFilter(request,response);
         }else {
             //从前端请求中获取token
             String token = request.getHeader(Constants.TOKEN_NAME);
-
+            System.out.println(token);
             //如果token为空
             if(!StringUtils.hasText(token)){
+
                 Result result = Result.error(CodeEnum.NO_LOGIN);
 
                 String resultJSON = JSONUtils.toJSON(result);
