@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "axios": "axios"
+  },
+  "exclude": ["node_modules", "dist"]
+}

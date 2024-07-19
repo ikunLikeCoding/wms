@@ -100,7 +100,7 @@
 <script setup>
 import { reactive, ref, computed } from 'vue';
 import { useRouter } from 'vue-router'
-import { get, put, del, tip, export2excel } from "@/common";
+import { get, put, del, tip } from "@/common";
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
 const router = useRouter(); // 获取路由器
@@ -146,19 +146,19 @@ const handleSelectionChange = (val) => {
 
 // 导出数据
 const export2Table = () => {
-  get("/user/exportTable", params).then(result => {
-    // 要导出的数据
-    const userList = result.data;
-    const columns = [
-      {"title": "用户ID", "key": "userId"},
-      {"title": "用户名", "key": "userCode"},
-      {"title": "昵称", "key": "userName"},
-      {"title": "用户状态", "key": "userState"},
-      {"title": "创建人", "key": "creatorCode"},
-      {"title": "创建时间", "key": "createTime"},
-    ];
-    export2excel(columns, userList, "员工信息表");
-  });
+  // get("/user/exportTable", params).then(result => {
+  //   // 要导出的数据
+  //   const userList = result.data;
+  //   const columns = [
+  //     {"title": "用户ID", "key": "userId"},
+  //     {"title": "用户名", "key": "userCode"},
+  //     {"title": "昵称", "key": "userName"},
+  //     {"title": "用户状态", "key": "userState"},
+  //     {"title": "创建人", "key": "creatorCode"},
+  //     {"title": "创建时间", "key": "createTime"},
+  //   ];
+  //   export2excel(columns, userList, "员工信息表");
+  // });
 }
 
 // 删除用户提交

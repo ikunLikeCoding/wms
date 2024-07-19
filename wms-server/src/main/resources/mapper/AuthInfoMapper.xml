@@ -20,6 +20,24 @@
             <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <resultMap id="AuthTreeResultMap" type="com.ikun.wms.pojo.dto.AuthTree">
+        <id property="authId" column="auth_id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="authName" column="auth_name" jdbcType="VARCHAR"/>
+        <result property="authDesc" column="auth_desc" jdbcType="VARCHAR"/>
+        <result property="authGrade" column="auth_grade" jdbcType="INTEGER"/>
+        <result property="authType" column="auth_type" jdbcType="CHAR"/>
+        <result property="authUrl" column="auth_url" jdbcType="VARCHAR"/>
+        <result property="authCode" column="auth_code" jdbcType="VARCHAR"/>
+        <result property="authOrder" column="auth_order" jdbcType="INTEGER"/>
+        <result property="authState" column="auth_state" jdbcType="CHAR"/>
+        <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <collection property="childAuth" ofType="AuthInfo" columnPrefix="sub_" resultMap="BaseResultMap"/>
+
+    </resultMap>
 
     <sql id="Base_Column_List">
         auth_id,parent_id,auth_name,
@@ -28,4 +46,26 @@
         auth_state,create_by,create_time,
         update_by,update_time
     </sql>
+    <select id="getAuthTreeByUserId" resultMap="AuthTreeResultMap">
+        SELECT
+            auth_info.auth_id,
+            auth_info.auth_url,
+            auth_info.auth_name,
+            sub.auth_id as sub_auth_id,
+            sub.auth_url AS sub_auth_url,
+                sub.auth_name AS sub_auth_name ,
+            sub.parent_id as parent_id
+        FROM
+            auth_info
+                LEFT JOIN role_auth ON role_auth.auth_id = auth_info.auth_id
+                LEFT JOIN user_role ON user_role.role_id = role_auth.role_id = user_role.role_id
+                LEFT JOIN auth_info sub ON sub.parent_id = auth_info.auth_id
+        WHERE
+            user_id = 1
+          AND sub.auth_url != ''
+          AND sub.auth_url IS NOT NULL
+          and auth_info.auth_state =1
+          and(auth_info.auth_url is  NULL or auth_info.auth_url = '')
+    </select>
+
 </mapper>

@@ -30,13 +30,7 @@
         </el-icon>
         &nbsp;添加仓库
       </el-button>
-      <!-- 导出数据 -->
-      <el-button type="warning" @click="export2Table">
-        <el-icon>
-          <svg t="1647313957290" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2289" width="200" height="200"><path d="M395.9 406H288.5c-2.8 0-5.7-0.7-8.1-2.4-18.4-13.1-18.2-34.3-6.4-46.3l217.6-220.9c11.1-11.2 29.2-11.4 40.4-0.3l0.3 0.3 217.7 221c11.1 11.3 10.9 29.4-0.4 40.4-5.3 5.2-12.5 8.2-19.9 8.2H628.1v215.7c0 7.9-6.4 14.3-14.3 14.3H410.2c-7.9 0-14.3-6.4-14.3-14.3V406zM283.3 652.4v87.5c0 7.9 6.4 14.3 14.3 14.3h428.8c7.9 0 14.3-6.4 14.3-14.3v-87.5c0-7.9 6.4-14.3 14.3-14.3h142.9c7.9 0 14.3 6.4 14.3 14.3V914c0 7.9-6.4 14.3-14.3 14.3H126.1c-7.9 0-14.3-6.4-14.3-14.3V652.4c0-7.9 6.4-14.3 14.3-14.3H269c7.9 0 14.3 6.4 14.3 14.3z" p-id="2290"></path></svg>
-        </el-icon>
-        &nbsp;导出数据
-      </el-button>
+
     </div>
   </div>
 
@@ -79,7 +73,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { get, put, del, tip, export2excel } from "@/common";
+import { get, put, del, tip } from "@/common";
 import { useRouter } from "vue-router";
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
@@ -107,23 +101,6 @@ const getStorePageList = () => {
   });
 }
 getStorePageList();
-
-// 导出数据
-const export2Table = () => {
-  get("/store/exportTable", params).then(result => {
-    // 要导出的数据
-    const storeList = result.data;
-    const columns = [
-      {"title": "仓库ID", "key": "storeId"},
-      {"title": "仓库名称", "key": "storeName"},
-      {"title": "仓库编号", "key": "storeNum"},
-      {"title": "仓库地址", "key": "storeAddress"},
-      {"title": "联系人", "key": "concat"},
-      {"title": "电话", "key": "phone"},
-    ];
-    export2excel(columns, storeList, "仓库信息表");
-  });
-}
 
 
 // 跳向添加仓库

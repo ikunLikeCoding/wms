@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/instore")
-public class instoreController {
+public class InstoreController {
     @RequestMapping("/instore")
-    public String instore(){
+    public String Instore(){
         return "instore";
     }
 

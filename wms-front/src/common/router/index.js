@@ -16,11 +16,11 @@ const router = createRouter({
 const whiteList = [LOGIN_ROUTE_NAME,"Register"];
 
 // 全局前置导航守卫
-router.beforeEach(async (to, from) => {
-	if(!existsRoute(to.path)){
-		return {name:'NotFound',query:{toPath:to.path}}
-	}
-	return true;
-})
-
+// router.beforeEach(async (to, from) => {
+// 	if(!existsRoute(to.path)){
+// 		return {name:'NotFound',query:{toPath:to.path}}
+// 	}
+// 	return true;
+// })
+//
 export default router;

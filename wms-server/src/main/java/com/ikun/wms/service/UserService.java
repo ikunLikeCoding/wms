@@ -1,8 +1,12 @@
 package com.ikun.wms.service;
 
+import com.ikun.wms.pojo.dto.AuthTree;
+import com.ikun.wms.pojo.entity.AuthInfo;
 import com.ikun.wms.pojo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -11,4 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 */
 public interface UserService extends IService<User>, UserDetailsService {
     User findByUserName(String username);
+
+
 }

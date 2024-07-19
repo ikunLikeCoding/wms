@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login" >
     <el-card class="box-card" shadow="always">
       <div
         style="
@@ -49,19 +49,22 @@
       </div>
     </el-card>
   </div>
+
+
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { get, post, tip, setLocalToken, API_BASE_URL} from "@/common";
+import axios from "axios";
 
 const loginForm = ref(); // 登录表单
 
 const router = useRouter(); // 获取路由器
 
-const loginUser = reactive({ 
-  userCode: "", 
+const loginUser = reactive({
+  userCode: "",
   userPwd: "",
   verificationCode: "",
   verificationKey: ''
@@ -75,10 +78,12 @@ const getCode = () => {
   get('/captcha/captchaImage').then(res => {
     // 图片的src属性显示为：前缀+后台传递的Base64验证码图片编码
     // 验证码可以正常显示
-    codeSrc.value = 'data:image/jpg;base64,' + res.data.imgUrl;
+    console.log(res)
+    codeSrc.value = res.data.img;
     loginUser.verificationKey = res.data.imgKey; // redis存储验证码的key
   })
 }
+
 getCode();
 
 const rules = reactive({
@@ -118,7 +123,10 @@ const login = () => {
   loginForm.value.validate((valid) => {
     if (valid) {
       // 向服务端发出post请求
-      post("/login", loginUser).then(result => {
+      let user = new FormData();
+      user.append("userCode", loginUser.userCode);
+      user.append("userPwd", loginUser.userPwd);
+      post("/user/login", user).then(result => {
         // 从回送结果中取出令牌，并将令牌存于客户端
         setLocalToken(result.data);
         tip.success("登录成功！");
@@ -128,12 +136,13 @@ const login = () => {
     }
   });
 };
+//   background-image: url("/login.jpg");
 </script>
 
 
 <style scoped>
 .login {
-  background-image: url("/login.jpg");
+
   background-size: 100% 100%;
 
   position: fixed;

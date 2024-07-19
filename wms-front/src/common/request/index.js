@@ -24,7 +24,7 @@ import { sureLoading } from "../sureLoading"
 class RequestInfoPool {
 
 	constructor() {
-		console.log('创建了请求信息池，timestamp：' + new Date().getTime());
+		// console.log('创建了请求信息池，timestamp：' + new Date().getTime());
 	}
 
 	pool = []
@@ -343,7 +343,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(function (response) {
 
 	// 请求成功做点什么
-	console.log("成功响应：", response.config.baseURL + response.config.url, response);
+	// console.log("成功响应：", response.config.baseURL + response.config.url, response);
 	//从请求信息池中清除已经结束的请求信息
 	requestInfoPool.removeRequestInfo(response.config);
 
@@ -510,7 +510,7 @@ const ajax = function (getAxiosPromise) {
 
 		} catch (error) { //发生异常
 
-			console.log(error);
+			// console.log(error);
 
 			message.error('错误:' + error.message);
 

@@ -9,7 +9,6 @@ export const LOCAL_TOKEN = import.meta.env.VITE_LOCAL_TOKEN; // 本地存储TOKE
 export const HEADER_TOKEN = import.meta.env.VITE_HEADER_TOKEN; // 请求头上TOKEN的名字
 export const LOGIN_ROUTE_NAME = import.meta.env.VITE_LOGIN_ROUTE_NAME; // 登录路由名称
 
-
 export default {
     install(app) {
         app.config.globalProperties.$version = VERSION;

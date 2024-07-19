@@ -2,14 +2,20 @@ package com.ikun.wms.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ikun.wms.mapper.AuthInfoMapper;
+import com.ikun.wms.pojo.dto.AuthTree;
+import com.ikun.wms.pojo.entity.AuthInfo;
 import com.ikun.wms.pojo.entity.User;
 
 import com.ikun.wms.mapper.UserInfoMapper;
 import com.ikun.wms.service.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -22,6 +28,8 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
 
     @Resource
     private UserInfoMapper userMapper;
+    @Resource
+    private AuthInfoMapper authInfoMapper;
 
     @Override
     public User findByUserName(String username) {
@@ -29,6 +37,7 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
         queryWrapper.eq("user_code", username);
         return userMapper.selectOne(queryWrapper);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

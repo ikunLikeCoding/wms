@@ -34,15 +34,7 @@
         </el-button>
       </el-form-item>
     </el-form>
-    <div>
-      <!-- 导出数据 -->
-      <el-button type="warning" @click="export2Table">
-        <el-icon>
-          <svg t="1647313957290" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2289" width="200" height="200"><path d="M395.9 406H288.5c-2.8 0-5.7-0.7-8.1-2.4-18.4-13.1-18.2-34.3-6.4-46.3l217.6-220.9c11.1-11.2 29.2-11.4 40.4-0.3l0.3 0.3 217.7 221c11.1 11.3 10.9 29.4-0.4 40.4-5.3 5.2-12.5 8.2-19.9 8.2H628.1v215.7c0 7.9-6.4 14.3-14.3 14.3H410.2c-7.9 0-14.3-6.4-14.3-14.3V406zM283.3 652.4v87.5c0 7.9 6.4 14.3 14.3 14.3h428.8c7.9 0 14.3-6.4 14.3-14.3v-87.5c0-7.9 6.4-14.3 14.3-14.3h142.9c7.9 0 14.3 6.4 14.3 14.3V914c0 7.9-6.4 14.3-14.3 14.3H126.1c-7.9 0-14.3-6.4-14.3-14.3V652.4c0-7.9 6.4-14.3 14.3-14.3H269c7.9 0 14.3 6.4 14.3 14.3z" p-id="2290"></path></svg>
-        </el-icon>
-        &nbsp;导出数据
-      </el-button>
-    </div>
+
   </div>
 
   <!-- 表格 -->
@@ -89,7 +81,7 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
-import { get, post, del, tip, export2excel } from "@/common";
+import { get, post, del, tip } from "@/common";
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
 const route = useRoute(); // 获取路由信息
@@ -134,29 +126,7 @@ const getStoreList = () => {
 }
 getStoreList();
 
-// 导出数据
-const export2Table = () => {
-  get("/purchase/exportTable", params).then(result => {
-    // 要导出的数据
-    const purchaseList = result.data;
-    // 将isIn字段的0、1转化为是否
-    purchaseList.reduce((pre, cur) => {
-      cur.isIn = cur.isIn==1?"已入库":"未入库";
-      return pre;
-    }, []);
-    const columns = [
-      {"title": "仓库名", "key": "storeName"},
-      {"title": "商品名", "key": "productName"},
-      {"title": "预计采购数量", "key": "buyNum"},
-      {"title": "实际采购数量", "key": "factBuyNum"},
-      {"title": "采购人", "key": "buyUser"},
-      {"title": "采购时间", "key": "buyTime"},
-      {"title": "采购人电话", "key": "phone"},
-      {"title": "入库状态", "key": "isIn"}
-    ];
-    export2excel(columns, purchaseList, "采购单列表");
-  });
-}
+
 
 // 跳向修改采购单
 import PurchaseUpdate from "./purchase-update.vue";
