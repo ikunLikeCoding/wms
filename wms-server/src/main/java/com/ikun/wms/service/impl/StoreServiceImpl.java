@@ -6,6 +6,7 @@ import com.ikun.wms.service.StoreService;
 import com.ikun.wms.mapper.StoreMapper;
 import org.springframework.stereotype.Service;
 
+
 /**
 * @author yiwan
 * @description 针对表【store(仓库表)】的数据库操作Service实现
