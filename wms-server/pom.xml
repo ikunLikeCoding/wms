@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ikun</groupId>
-	<artifactId>wms</artifactId>
+	<artifactId>wms-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>wms</name>
 	<description>wms</description>
