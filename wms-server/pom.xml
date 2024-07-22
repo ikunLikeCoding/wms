@@ -41,11 +41,7 @@
 			<version>3.5.7</version>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.oopsguy.kaptcha</groupId>-->
-<!--			<artifactId>kaptcha-spring-boot-starter</artifactId>-->
-<!--			<version>1.0.0-beta-2</version>-->
-<!--		</dependency>-->
+
 		<dependency>
 			<groupId>com.github.penggle</groupId>
 			<artifactId>kaptcha</artifactId>

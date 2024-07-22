@@ -1,5 +1,6 @@
 package com.ikun.wms.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.dto.AuthTree;
 import com.ikun.wms.pojo.entity.AuthInfo;
@@ -23,7 +24,6 @@ public class AuthInfoServiceImpl extends ServiceImpl<AuthInfoMapper, AuthInfo>
 
     @Override
     public List<AuthTree> getAuthTreeByUserId() {
-
 
         return  authInfoMapper.getAuthTreeByUserId();
     }
