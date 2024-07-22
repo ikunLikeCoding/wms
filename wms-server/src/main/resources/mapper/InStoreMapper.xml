@@ -20,7 +20,7 @@
         is_in
     </sql>
     <update id="updateStoreNums">
-        update wms.product set product_num = product_num + #{inNum}
+        update wms.product set product_invent = product_invent + #{inNum}
         where product_id = #{productId}
     </update>
 </mapper>
