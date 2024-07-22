@@ -12,10 +12,48 @@
             <result property="concat" column="concat" jdbcType="VARCHAR"/>
             <result property="phone" column="phone" jdbcType="VARCHAR"/>
     </resultMap>
+    
+    <resultMap id="InStoreVoResultMap" type="com.ikun.wms.pojo.vo.InStoreVO">
+        <id property="insId" column="ins_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+
+        <result property="inNum" column="in_num" jdbcType="INTEGER"/>
+        <result property="inPrice" column="in_price" jdbcType="DECIMAL"/>
+        <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+        <result property="isIn" column="is_in" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+
+        <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+        <result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+        <result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <sql id="Base_Column_List">
         store_id,store_name,store_num,
         store_address,concat,phone
     </sql>
+    <select id="findStoreByPageAndCondition" resultMap="InStoreVoResultMap">
+        select ins.*, product.product_name,
+               product.in_price,
+               store.store_name
+        from wms.in_store ins
+        left join product on product.product_id = ins.product_id
+        left join store on store.store_id = ins.store_id
+        <where>
+            <if test="storeId != null">
+                and ins.store_id = #{storeId}
+            </if>
+            <if test="productName != null">
+                and product_name like concat('%',#{productName},'%')
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and ins.create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null and endTime !=''">
+                and ins.create_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
 
 </mapper>

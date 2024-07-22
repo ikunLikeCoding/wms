@@ -19,4 +19,8 @@
         in_num,create_by,create_time,
         is_in
     </sql>
+    <update id="updateStoreNums">
+        update wms.product set product_num = product_num + #{inNum}
+        where product_id = #{productId}
+    </update>
 </mapper>

@@ -33,7 +33,6 @@ public class TokenVerifyFilter extends OncePerRequestFilter {
         }else {
             //从前端请求中获取token
             String token = request.getHeader(Constants.TOKEN_NAME);
-            System.out.println(token);
             //如果token为空
             if(!StringUtils.hasText(token)){
 

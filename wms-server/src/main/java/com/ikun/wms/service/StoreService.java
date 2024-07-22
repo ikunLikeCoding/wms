@@ -1,7 +1,10 @@
 package com.ikun.wms.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.Store;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikun.wms.pojo.query.InStoreQuery;
+import com.ikun.wms.pojo.vo.InStoreVO;
 
 /**
 * @author yiwan
@@ -11,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface StoreService extends IService<Store> {
 
 
+    PageInfo<InStoreVO> findStoreByPageAndCondition(InStoreQuery inStoreQuery);
 }

@@ -9,6 +9,6 @@ import lombok.Data;
 
 @Data
 public class BaseQuery {
-    private Integer currentPage;
-    private Integer pageSize;
+    private Integer currentPage =  1;
+    private Integer pageSize = 10;
 }

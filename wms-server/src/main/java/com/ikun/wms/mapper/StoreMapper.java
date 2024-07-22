@@ -1,7 +1,12 @@
 package com.ikun.wms.mapper;
 
+import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.wms.pojo.query.InStoreQuery;
+import com.ikun.wms.pojo.vo.InStoreVO;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -11,6 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface StoreMapper extends BaseMapper<Store> {
 
+    List<InStoreVO> findStoreByPageAndCondition(InStoreQuery inStoreQuery);
 }
 
 
