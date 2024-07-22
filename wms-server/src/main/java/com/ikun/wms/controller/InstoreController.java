@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/instore")
-public class InStoreController {
+public class InstoreController {
     @Autowired
     private StoreService StoreService;
     /**

@@ -17,4 +17,5 @@
         store_id,store_name,store_num,
         store_address,concat,phone
     </sql>
+
 </mapper>
