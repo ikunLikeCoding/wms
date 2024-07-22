@@ -4,7 +4,10 @@
     <el-form inline class="searchForm">
       <el-form-item>
         <el-select v-model="params.storeId" style="width: 120px;" clearable>
-          <el-option v-for="store of storeList" :label="store.storeName" :value="store.storeId" :key="store.storeId"></el-option>
+          <el-option v-for="store of storeList"
+                     :label="store.storeName"
+                     :value="store.storeId"
+                     :key="store.storeId"/>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -44,7 +47,8 @@
     <el-table-column prop="createTime" label="创建时间" sortable />
     <el-table-column label="操作">
       <template #default="props">
-        <el-button v-if="props.row.isIn==0" type="primary" title="确定入库" @click="confirmInstore(props.row)" :key="props.row.insId">确定入库</el-button>
+        <el-button v-if="props.row.isIn==0" type="primary" title="确定入库" @click="confirmInstore(props.row)"
+                   :key="props.row.insId">确定入库</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -54,7 +58,7 @@
     :total="params.totalNum"
     :page-sizes="[5, 10, 15, 20, 25, 30]"
     v-model:page-size="params.pageSize"
-    v-model:currentPage="params.pageNum"
+    v-model:currentPage="params.currentPage"
     layout="total, sizes, prev, pager, next, jumper"
     style="margin-top: 20px;"
     @size-change="changeSize"
@@ -78,7 +82,7 @@ const params = reactive({
   startTime: '',
   endTime: '',
   pageSize: 5,
-  pageNum: 1,
+  currentPage: 1,
   totalNum: 0
 })
 
@@ -92,9 +96,10 @@ const getInstorePageList = () => {
     params.storeId = parseInt(route.query.storeId);
   }
   // 后台获取查询结果
-  get("/instore/instore-page-list", params).then(result => {
-    instorePageList.value = result.data.resultList;
-    params.totalNum = result.data.totalNum;
+  get("/instore/store-page-list", params).then(result => {
+    console.log(result)
+    instorePageList.value = result.data.list;
+    params.totalNum = result.data.total;
   });
 }
 getInstorePageList();
@@ -126,7 +131,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getInstorePageList();
 }

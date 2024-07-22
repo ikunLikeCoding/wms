@@ -79,7 +79,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue';
-import { get, put, del, tip, export2excel } from "@/common";
+import { get, put, del, tip } from "@/common";
 import { useRoute, useRouter } from "vue-router";
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
