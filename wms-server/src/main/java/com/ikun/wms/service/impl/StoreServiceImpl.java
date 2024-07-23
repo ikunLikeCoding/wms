@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.Store;
 import com.ikun.wms.pojo.query.InStoreQuery;
+import com.ikun.wms.pojo.query.StoreQuery;
 import com.ikun.wms.pojo.vo.InStoreVO;
 import com.ikun.wms.service.StoreService;
 import com.ikun.wms.mapper.StoreMapper;
@@ -30,6 +31,16 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store>
         PageHelper.startPage(inStoreQuery.getCurrentPage(), inStoreQuery.getPageSize());
         List<InStoreVO> storeByPageAndCondition = storeMapper.findStoreByPageAndCondition(inStoreQuery);
         return new PageInfo<>(storeByPageAndCondition);
+    }
+
+    @Override
+    public List<Store> findPageStore(StoreQuery storeQuery) {
+        return storeMapper.findPageStore(storeQuery);
+    }
+
+    @Override
+    public Store findStoreByNum(String storeNum) {
+        return storeMapper.findStoreByNum(storeNum);
     }
 }
 
