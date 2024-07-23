@@ -60,7 +60,7 @@
     :total="params.totalNum"
     :page-sizes="[5, 10, 15, 20, 25, 30]"
     v-model:page-size="params.pageSize"
-    v-model:currentPage="params.pageNum"
+    v-model:currentPage="params.currentPage"
     layout="total, sizes, prev, pager, next, jumper"
     style="margin-top: 20px;"
     @size-change="changeSize"
@@ -85,7 +85,7 @@ const params = reactive({
   endTime: '',
   isOut: '',
   pageSize: 5,
-  pageNum: 1,
+  currentPage: 1,
   totalNum: 0
 })
 
@@ -100,8 +100,9 @@ const getOutstorePageList = () => {
   }
   // 后台获取查询结果
   get("/outstore/outstore-page-list", params).then(result => {
-    outstorePageList.value = result.data.resultList;
-    params.totalNum = result.data.totalNum;
+    console.log(result.data);
+    outstorePageList.value = result.data.list;
+    params.totalNum = result.data.total;
   });
 }
 getOutstorePageList();
@@ -110,7 +111,7 @@ getOutstorePageList();
 const storeList = ref();
 // 获取所有仓库
 const getStoreList = () => {
-  get("/outstore/store-list").then(result => {
+  get("/instore/store-list").then(result => {
     storeList.value = result.data;
   });
 }
@@ -135,7 +136,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getOutstorePageList();
 }
