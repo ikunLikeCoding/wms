@@ -2,9 +2,15 @@ package com.ikun.wms.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.BuyList;
+import com.ikun.wms.pojo.entity.InStore;
 import com.ikun.wms.service.BuyListService;
 import com.ikun.wms.mapper.BuyListMapper;
+import com.ikun.wms.service.InStoreService;
+import com.ikun.wms.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -14,6 +20,47 @@ import org.springframework.stereotype.Service;
 @Service
 public class BuyListServiceImpl extends ServiceImpl<BuyListMapper, BuyList>
     implements BuyListService{
+
+    @Autowired
+    private BuyListMapper buyListMapper;
+    @Autowired
+    private InStoreService inStoreService;
+    @Override
+    public int purchaseAdd(BuyList buyList) {
+        return buyListMapper.purchaseAdd(buyList);
+    }
+
+    @Override
+    public List<BuyList> findpurchaseList(BuyList buyList) {
+        return buyListMapper.findpurchaseList(buyList);
+    }
+
+    @Override
+    public int purchaseUpdate(BuyList buyList) {
+        return buyListMapper.purchaseUpdate(buyList);
+    }
+
+    @Override
+    public int saveInStore(BuyList buyList, int userId) {
+        InStore inStore=new InStore();
+        inStore.setStoreId(buyList.getStoreId());
+        inStore.setProductId(buyList.getProductId());
+        inStore.setInNum(buyList.getFactBuyNum());
+        inStore.setCreateBy(userId);
+        boolean i = inStoreService.save(inStore);
+        if(i){
+            //根据id将采购单状态改为已入库
+            int j = buyListMapper.updateIsInById(buyList.getBuyId());
+            if(j>0){//成功
+                return 1;
+            }
+            //失败
+            return 0;
+        }
+        //失败
+       return 0;
+    }
+
 
 }
 
