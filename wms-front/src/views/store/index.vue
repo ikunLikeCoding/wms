@@ -56,7 +56,7 @@
     :total="params.totalNum"
     :page-sizes="[5, 10, 15, 20, 25, 30]"
     v-model:page-size="params.pageSize"
-    v-model:currentPage="params.pageNum"
+    v-model:currentPage="params.currentPage"
     layout="total, sizes, prev, pager, next, jumper"
     style="margin-top: 20px;"
     @size-change="changeSize"
@@ -86,7 +86,7 @@ const params = reactive({
   concat: '',
   phone: '',
   pageSize: 5,
-  pageNum: 1,
+  currentPage: 1,
   totalNum: 0
 })
 
@@ -96,8 +96,9 @@ const storePageList = ref();
 // 获取分页模糊查询结果
 const getStorePageList = () => {
   get("/store/store-page-list", params).then(result => {
-    storePageList.value = result.data.resultList;
+    storePageList.value = result.data.list;
     params.totalNum = result.data.totalNum;
+    console.log(result.data);
   });
 }
 getStorePageList();
@@ -136,7 +137,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getStorePageList();
 }
