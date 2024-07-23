@@ -1,10 +1,10 @@
 <template>
     <el-form inline>
       <el-form-item label="用户名:">
-        <el-input v-model="params.userCode" placeholder="用户名" style="width: 120px;"  clearable></el-input>
+        <el-input v-model="params.userName" placeholder="用户名" style="width: 120px;"  clearable></el-input>
       </el-form-item>
       <el-form-item label="用户类型:" style="margin-left: 30px;">
-        <el-select v-model="params.userType" placeholder="用户类型" style="width: 120px;" clearable>
+        <el-select v-model="params.roleId" placeholder="用户类型" style="width: 120px;" clearable>
           <el-option v-for="role of roleList" :label="role.roleName" :value="role.roleId" :key="role.roleId"></el-option>
         </el-select>
       </el-form-item>
@@ -31,15 +31,7 @@
         </el-icon>
         &nbsp;添加用户
       </el-button>
-      <!-- 导出数据：https://www.cnblogs.com/wangdashi/p/9269129.html -->
-      <!-- https://zhuanlan.zhihu.com/p/77791428 -->
-      <!-- https://www.cnblogs.com/muyangw/p/10306152.html -->
-      <el-button type="warning" @click="export2Table">
-        <el-icon>
-          <svg t="1647313957290" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2289" width="200" height="200"><path d="M395.9 406H288.5c-2.8 0-5.7-0.7-8.1-2.4-18.4-13.1-18.2-34.3-6.4-46.3l217.6-220.9c11.1-11.2 29.2-11.4 40.4-0.3l0.3 0.3 217.7 221c11.1 11.3 10.9 29.4-0.4 40.4-5.3 5.2-12.5 8.2-19.9 8.2H628.1v215.7c0 7.9-6.4 14.3-14.3 14.3H410.2c-7.9 0-14.3-6.4-14.3-14.3V406zM283.3 652.4v87.5c0 7.9 6.4 14.3 14.3 14.3h428.8c7.9 0 14.3-6.4 14.3-14.3v-87.5c0-7.9 6.4-14.3 14.3-14.3h142.9c7.9 0 14.3 6.4 14.3 14.3V914c0 7.9-6.4 14.3-14.3 14.3H126.1c-7.9 0-14.3-6.4-14.3-14.3V652.4c0-7.9 6.4-14.3 14.3-14.3H269c7.9 0 14.3 6.4 14.3 14.3z" p-id="2290"></path></svg>
-        </el-icon>
-        &nbsp;导出数据
-      </el-button>
+
       <el-select placeholder="批量操作" style="width: 110px;margin-left: 12px; position: relative; top: 2px;">
         <el-option @click="deleteUserList">
           <span style="float: left;">
@@ -61,7 +53,7 @@
             <span :class="{red:props.row.userState=='0'}">{{props.row.userState=="0"?"禁用":"启用"}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="creatorCode" label="创建人" sortable />
+      <el-table-column prop="createByCode" label="创建人" sortable />
       <el-table-column prop="createTime" label="创建时间" sortable />
       <el-table-column label="操作">
         <template #default="props">
@@ -77,10 +69,10 @@
     <!-- 分页 -->
     <el-pagination
       background
-      :total="params.totalNum"
+      :total="params.total"
       :page-sizes="[5, 10, 15, 20, 25, 30]"
       v-model:page-size="params.pageSize"
-      v-model:currentPage="params.pageNum"
+      v-model:currentPage="params.currentPage"
       layout="total, sizes, prev, pager, next, jumper"
       style="margin-top: 20px;"
       @size-change="changeSize"
@@ -107,12 +99,12 @@ const router = useRouter(); // 获取路由器
 
 // 分页模糊查询数据
 const params = reactive({
-  userCode: '',
-  userType: '',
+  userName: '',
+  roleId: '',
   userState: '',
   pageSize: 5,
-  pageNum: 1,
-  totalNum: 0
+  currentPage: 1,
+  total: 0
 })
 
 // 表格数据
@@ -121,8 +113,9 @@ const userList = ref();
 // 获取查询结果
 const getUserList = () => {
   get("/user/user-page-list", params).then(result => {
-    userList.value = result.data.resultList;
-    params.totalNum = result.data.totalNum;
+    // console.log(result)
+    userList.value = result.data.list;
+    params.total = result.data.total;
   });
 }
 getUserList();
@@ -144,22 +137,7 @@ const handleSelectionChange = (val) => {
   console.log(multipleSelection.value);
 }
 
-// 导出数据
-const export2Table = () => {
-  // get("/user/exportTable", params).then(result => {
-  //   // 要导出的数据
-  //   const userList = result.data;
-  //   const columns = [
-  //     {"title": "用户ID", "key": "userId"},
-  //     {"title": "用户名", "key": "userCode"},
-  //     {"title": "昵称", "key": "userName"},
-  //     {"title": "用户状态", "key": "userState"},
-  //     {"title": "创建人", "key": "creatorCode"},
-  //     {"title": "创建时间", "key": "createTime"},
-  //   ];
-  //   export2excel(columns, userList, "员工信息表");
-  // });
-}
+
 
 // 删除用户提交
 const deleteUser = (userId) => {
@@ -247,7 +225,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getUserList();
 }
