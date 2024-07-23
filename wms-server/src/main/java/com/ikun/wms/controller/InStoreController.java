@@ -24,13 +24,13 @@ public class InStoreController {
     /**
      * 获取所有商品
      */
-    @RequestMapping("/store-list")
+    @GetMapping("/store-list")
     public Result storeList(){
         List<Store> storeList = StoreService.list();
         return Result.success(storeList);
     }
 
-    @RequestMapping("/store-page-list")
+    @GetMapping("/store-page-list")
     public Result<PageInfo<InStoreVO>> storePageList(InStoreQuery inStoreQuery){
         System.out.println(inStoreQuery);
         System.out.println(inStoreQuery.getCurrentPage());
