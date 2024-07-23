@@ -70,9 +70,8 @@ public class PurchaseController {
     }
     @RequestMapping("/in-warehouse-record-add")
     public Result inWarehouseRecordAdd(@RequestBody BuyList buyList){
-        //此处通过token获取userid
-        int userid =1;
-        int i=buyListService.saveInStore(buyList,userid);
+
+        int i=buyListService.saveInStore(buyList);
         if(i==1)
         return Result.success();
         else return Result.error();

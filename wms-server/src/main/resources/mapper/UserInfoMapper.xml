@@ -24,4 +24,35 @@
         is_delete,create_by,create_time,
         update_by,update_time
     </sql>
+    <select id="findUserByPageAndCondition" parameterType="com.ikun.wms.pojo.query.UserQuery"
+            resultType="com.ikun.wms.pojo.vo.UserVO">
+        select ui.user_id,
+               ui.user_code,
+               ui.user_name,
+               ui.user_state,
+                cb.user_code as createByCode,
+                ui.create_time
+        from wms.user_info ui
+        left join wms.user_info cb on  ui.create_by = cb.user_id
+        left join wms.user_role on ui.user_id = user_role.user_id
+        <where>
+            <if test="userName != null and userName != ''">
+                and ui.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userState != null and userState != ''">
+                and ui.user_state like concat('%',#{userState,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="roleId != null and roleId !=''">
+              and user_role.role_id = #{roleId,jdbcType=VARCHAR}
+            </if>
+            <if test="true">
+                and ui.is_delete = 0
+            </if>
+        </where>
+    </select>
+    <select id="getRoleList" resultMap="com.ikun.wms.mapper.RoleMapper.BaseResultMap" >
+        select * from wms.role
+        left join wms.user_role on wms.role.role_id = wms.user_role.role_id
+        where wms.user_role.user_id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

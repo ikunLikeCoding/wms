@@ -22,7 +22,7 @@ public class InStoreController {
     @Resource
     private InStoreService inStoreService;
     /**
-     * 获取所有商品
+     * 获取所有仓库
      */
     @GetMapping("/store-list")
     public Result storeList(){

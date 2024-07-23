@@ -1,9 +1,13 @@
 package com.ikun.wms.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.dto.AuthTree;
 import com.ikun.wms.pojo.entity.AuthInfo;
+import com.ikun.wms.pojo.entity.Role;
 import com.ikun.wms.pojo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikun.wms.pojo.query.UserQuery;
+import com.ikun.wms.pojo.vo.UserVO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -17,4 +21,9 @@ public interface UserService extends IService<User>, UserDetailsService {
     User findByUserName(String username);
 
 
+    PageInfo<UserVO> findUserByPageAndCondition(UserQuery userQuery);
+
+    int updateUserState(User user);
+
+    List<Role> getRoleList(Integer id);
 }
