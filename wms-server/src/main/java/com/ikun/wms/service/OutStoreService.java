@@ -1,7 +1,9 @@
 package com.ikun.wms.service;
 
+import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.OutStore;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikun.wms.pojo.query.OutStoreQuery;
 
 /**
 * @author yiwan
@@ -10,4 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OutStoreService extends IService<OutStore> {
 
+    PageInfo<OutStore> findOutStoreByPageAndCondition(OutStoreQuery outStoreQuery);
 }

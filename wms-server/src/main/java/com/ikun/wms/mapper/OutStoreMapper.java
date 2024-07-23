@@ -2,6 +2,9 @@ package com.ikun.wms.mapper;
 
 import com.ikun.wms.pojo.entity.OutStore;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.wms.pojo.query.OutStoreQuery;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface OutStoreMapper extends BaseMapper<OutStore> {
 
+    List<OutStore> findOutStoreByPageAndCondition(OutStoreQuery outStoreQuery);
 }
 
 

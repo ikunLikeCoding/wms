@@ -21,4 +21,8 @@
         tally_id,out_price,out_num,
         create_by,create_time,is_out
     </sql>
+    <select id="findOutStoreByPageAndCondition" resultType="com.ikun.wms.pojo.entity.OutStore">
+        select *
+        from wms.out_store;
+    </select>
 </mapper>
