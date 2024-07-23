@@ -15,6 +15,8 @@ import java.util.List;
 public interface OutStoreMapper extends BaseMapper<OutStore> {
 
     List<OutStore> findOutStoreByPageAndCondition(OutStoreQuery outStoreQuery);
+
+
 }
 
 

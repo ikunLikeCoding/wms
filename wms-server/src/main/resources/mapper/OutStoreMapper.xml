@@ -16,13 +16,53 @@
             <result property="isOut" column="is_out" jdbcType="CHAR"/>
     </resultMap>
 
+    <resultMap id="InStoreVOResultMap" type="com.ikun.wms.pojo.vo.OutStoreVO">
+        <id property="outsId" column="outs_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="outNum" column="out_num" jdbcType="INTEGER"/>
+        <result property="inPrice" column="in_price" jdbcType="DECIMAL"/>
+        <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="storeId" column="store_id" jdbcType="INTEGER"/>
+        <result property="storeName" column="store_name" jdbcType="VARCHAR"/>
+        <result property="tallyCode" column="tally_id" jdbcType="VARCHAR"/>
+        <result property="isOut" column="is_out" jdbcType="CHAR"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         outs_id,product_id,store_id,
         tally_id,out_price,out_num,
         create_by,create_time,is_out
     </sql>
-    <select id="findOutStoreByPageAndCondition" resultType="com.ikun.wms.pojo.entity.OutStore">
-        select *
-        from wms.out_store;
+
+    <select id="findOutStoreByPageAndCondition" resultMap="InStoreVOResultMap">
+        select ins.*, product.product_name,
+        product.in_price,
+        store.store_name,
+        ins.tally_id,
+        user_info.user_code
+        from wms.out_store ins
+        left join product on product.product_id = ins.product_id
+        left join store on store.store_id = ins.store_id
+       left join wms.user_info on user_info.user_id = ins.create_by
+        <where>
+            <if test="storeId != null">
+                and ins.store_id = #{storeId}
+            </if>
+            <if test="productName != null">
+                and product_name like concat('%',#{productName},'%')
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and ins.create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null and endTime !=''">
+                and ins.create_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="isOut != null">
+                and ins.is_out = #{isOut}
+            </if>
+        </where>
     </select>
 </mapper>

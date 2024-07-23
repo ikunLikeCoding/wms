@@ -5,6 +5,8 @@ package com.ikun.wms.controller;
  * @Date: 2024/7/22
  */
 
+import com.ikun.wms.utils.Result;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,4 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/productCategory")
 public class ProductTypeController {
+
+    @GetMapping("/product-category-tree")
+    public Result productCategoryTree() {
+
+        return Result.success();
+    }
 }

@@ -13,4 +13,6 @@ import com.ikun.wms.pojo.query.OutStoreQuery;
 public interface OutStoreService extends IService<OutStore> {
 
     PageInfo<OutStore> findOutStoreByPageAndCondition(OutStoreQuery outStoreQuery);
+
+    int confirmOutStore(OutStore outStore);
 }

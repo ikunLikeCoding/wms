@@ -16,7 +16,6 @@
     <resultMap id="InStoreVoResultMap" type="com.ikun.wms.pojo.vo.InStoreVO">
         <id property="insId" column="ins_id" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-
         <result property="inNum" column="in_num" jdbcType="INTEGER"/>
         <result property="inPrice" column="in_price" jdbcType="DECIMAL"/>
         <result property="createBy" column="create_by" jdbcType="INTEGER"/>
