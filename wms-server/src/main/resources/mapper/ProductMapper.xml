@@ -28,7 +28,6 @@
             <result property="productDate" column="product_date" jdbcType="TIMESTAMP"/>
             <result property="suppDate" column="supp_date" jdbcType="TIMESTAMP"/>
     </resultMap>
-
     <sql id="Base_Column_List">
         product_id,store_id,brand_id,
         product_name,product_num,product_invent,
@@ -39,4 +38,5 @@
         update_by,imgs,product_date,
         supp_date
     </sql>
+
 </mapper>

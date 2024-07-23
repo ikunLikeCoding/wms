@@ -1,7 +1,10 @@
 package com.ikun.wms.mapper;
 
+import com.ikun.wms.pojo.dto.ProductTypeTreeDTO;
 import com.ikun.wms.pojo.entity.ProductType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface ProductTypeMapper extends BaseMapper<ProductType> {
 
+    List<ProductTypeTreeDTO> getProductTypeTree();
 }
 
 
