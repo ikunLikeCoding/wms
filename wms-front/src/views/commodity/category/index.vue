@@ -27,14 +27,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import { get, del, tip } from "@/common";
 
 const currNode = ref(); // 当前选中的节点对象
 
 // 树形结构数据对应实体类属性
 const props = {
-  children: 'childProductCategory',
+  children: 'children',
   label: 'typeName'
 }
 
@@ -49,7 +49,6 @@ const getCategoryTree = () => {
     currNode.value = null; // 当前选中节点置为null
   });
 }
-getCategoryTree();
 
 // 分类树对象
 const categoryTreeRef = ref();
@@ -97,6 +96,13 @@ const deleteCategory = () => {
     getCategoryTree();
   });
 }
+
+
+onMounted(() => {
+  getCategoryTree();
+
+
+})
 </script>
 
 <style scoped>
