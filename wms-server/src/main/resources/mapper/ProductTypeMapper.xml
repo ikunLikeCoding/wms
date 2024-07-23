@@ -12,8 +12,32 @@
             <result property="typeDesc" column="type_desc" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="ProductTypeTreeDTOMap" type="com.ikun.wms.pojo.dto.ProductTypeTreeDTO">
+        <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="typeCode" column="type_code" jdbcType="VARCHAR"/>
+        <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
+        <result property="typeDesc" column="type_desc" jdbcType="VARCHAR"/>
+        <collection property="children"
+                    ofType="com.ikun.wms.pojo.dto.ProductTypeTreeDTO"
+                    columnPrefix="sec_"
+                    resultMap="ProductTypeTreeDTOMap"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         type_id,parent_id,type_code,
         type_name,type_desc
     </sql>
+    <select id="getProductTypeTree" resultMap="ProductTypeTreeDTOMap">
+            select  pt.*,
+                    sec_node.type_id as sec_type_id,
+                    sec_node.parent_id as sec_parent_id,
+                    sec_node.type_code as sec_type_code,
+                    sec_node.type_name as sec_type_name,
+                    sec_node.type_desc as sec_type_desc
+            from
+                wms.product_type pt
+                    left join wms.product_type sec_node on pt.type_id = sec_node.parent_id
+            where pt.parent_id = 0
+    </select>
 </mapper>

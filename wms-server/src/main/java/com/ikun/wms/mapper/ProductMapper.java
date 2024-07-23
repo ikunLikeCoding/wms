@@ -1,7 +1,10 @@
 package com.ikun.wms.mapper;
 
+import com.ikun.wms.pojo.dto.ProductTypeTreeDTO;
 import com.ikun.wms.pojo.entity.Product;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author yiwan

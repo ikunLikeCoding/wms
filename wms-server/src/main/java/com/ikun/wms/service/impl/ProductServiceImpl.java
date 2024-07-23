@@ -1,10 +1,14 @@
 package com.ikun.wms.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ikun.wms.pojo.dto.ProductTypeTreeDTO;
 import com.ikun.wms.pojo.entity.Product;
 import com.ikun.wms.service.ProductService;
 import com.ikun.wms.mapper.ProductMapper;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author yiwan

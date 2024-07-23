@@ -1,7 +1,10 @@
 package com.ikun.wms.service;
 
+import com.ikun.wms.pojo.dto.ProductTypeTreeDTO;
 import com.ikun.wms.pojo.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -9,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2024-07-18 16:23:43
 */
 public interface ProductService extends IService<Product> {
+
 
 }

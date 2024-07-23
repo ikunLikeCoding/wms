@@ -41,7 +41,8 @@ const validateCode = async(rule, typeCode, callback) => {
   typeCode = typeCode.trim();
   if(typeCode === '') return callback(new Error('请输入分类编码！'));
   const res = await get(`/productCategory/type-code-verify?typeCode=${typeCode}`);
-  if(!res.data) return callback(new Error('该分类编码已存在！'));
+  console.log(!res.data)
+  if(res.data) return callback(new Error('该分类编码已存在！'));
   return true;
 }
 
