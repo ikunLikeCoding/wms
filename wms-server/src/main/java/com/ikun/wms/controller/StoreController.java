@@ -68,12 +68,6 @@ public class StoreController {
         storeService.updateById(store);
         return Result.success();
     }
-
-    /**
-     * 仓库删除
-     * @param storeId
-     * @return
-     */
     @RequestMapping("/store-delete")
     public Result storeDelete(@RequestParam("storeId") Integer storeId) {
         storeService.removeById(storeId);
