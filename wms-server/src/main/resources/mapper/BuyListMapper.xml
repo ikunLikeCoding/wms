@@ -24,4 +24,32 @@
         supply_id,place_id,buy_user,
         phone,is_in
     </sql>
+    <!--采购添加-->
+    <insert id="purchaseAdd">
+        insert into buy_list (product_id,store_id,buy_num,buy_time,supply_id,place_id,buy_user,phone,is_in)
+        values (#{productId},#{storeId},#{buyNum},now(),#{supplyId},#{placeId},#{buyUser},#{phone},0)
+    </insert>
+    <update id="purchaseUpdate">
+        update buy_list set fact_buy_num=#{factBuyNum},buy_num=#{buyNum} where buy_id=#{buyId}
+    </update>
+    <update id="updateIsInById">
+        update buy_list set is_in = 1 where buy_id = #{buyId}
+    </update>
+    <select id="findpurchaseList" resultType="com.ikun.wms.pojo.entity.BuyList">
+        select * from buy_list
+        <where>
+            <if test="productId!=null">
+                and product_id=#{productId}
+            </if>
+            <if test="storeId!=null">
+                and store_id=#{storeId}
+            </if>
+            <if test="supplyId!=null">
+                and supply_id=#{supplyId}
+            </if>
+            <if test="placeId!=null">
+                and place_id=#{placeId}
+            </if>
+        </where>
+    </select>
 </mapper>

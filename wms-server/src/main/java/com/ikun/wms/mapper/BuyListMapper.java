@@ -2,6 +2,10 @@ package com.ikun.wms.mapper;
 
 import com.ikun.wms.pojo.entity.BuyList;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ikun.wms.pojo.entity.InStore;
+import com.ikun.wms.utils.Result;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -11,6 +15,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface BuyListMapper extends BaseMapper<BuyList> {
 
+    public int purchaseAdd(BuyList buyList);
+
+    public List<BuyList> findpurchaseList(BuyList buyList);
+
+    public int purchaseUpdate(BuyList buyList);
+
+    public int updateIsInById(Integer buyId);
 }
 
 
