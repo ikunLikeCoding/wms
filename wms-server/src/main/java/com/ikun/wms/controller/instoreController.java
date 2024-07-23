@@ -42,7 +42,7 @@ public class InStoreController {
 
     @PutMapping("/instore-confirm")
     public Result inStoreConfirm(@RequestBody InStore inStore){
-        System.out.println("inStore"+inStore);
+        System.out.println("inStore1"+inStore);
         Integer i = inStoreService.confirmInStore(inStore);
         if (i == 0){
             return Result.error("入库失败");
