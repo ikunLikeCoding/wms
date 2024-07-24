@@ -20,6 +20,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import {put,get,post,del,tip} from "@/common/index.js";
 
 const visible = ref(false); // 该页面的可见性
 // 修改角色对象

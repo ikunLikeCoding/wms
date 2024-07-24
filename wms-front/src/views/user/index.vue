@@ -62,7 +62,7 @@
           <el-button type="warning" @click="updateState(props.row)">{{props.row.userState=="1"?"禁用":"启用"}}</el-button>
           <el-button type="primary" v-if="props.row.userState==1" @click="resetPwd(props.row.userId)">重置密码</el-button>
           <el-button type="primary" v-if="props.row.userState==1" @click="openAssignRole(props.row)">分配角色</el-button>
-          <el-button type="primary" v-if="props.row.userState==1" @click="openUpdateAuth(props.row)">更改权限</el-button>
+<!--          <el-button type="primary" v-if="props.row.userState==1" @click="openUpdateAuth(props.row)">更改权限</el-button>-->
         </template>
       </el-table-column>
     </el-table>

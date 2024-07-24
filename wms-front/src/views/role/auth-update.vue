@@ -38,7 +38,7 @@ const props = {
 const data = ref([]);
 // 获取所有权限
 const getAllAuth = () => {
-  get('/auth/auth-tree').then(result => {
+  get('/allAuth').then(result => {
     data.value = result.data;
   });
 }
@@ -50,8 +50,9 @@ const checkedKeys = ref([]);
 // 获取角色对应的权限id
 const getRoleAuthList = () => {
   roleId = route.query.roleId;
-  get(`/role/role-auth?roleId=${roleId}`).then(result => {
-    checkedKeys.value = result.data;
+  get(`/role/role-auth/${roleId}`).then(result => {
+    let temp = result.data.map(item => item.authId);
+    checkedKeys.value = temp;
   });
 }
 getRoleAuthList();
@@ -61,6 +62,7 @@ const authTreeRef = ref();
 const updateAuth = () => {
   checkedKeys.value = authTreeRef.value.getCheckedKeys(false);
   put("/role/auth-grant", {"roleId": roleId, "authIds": checkedKeys.value}).then(result => {
+    console.log(checkedKeys.value)
     tip.success(result.message);
     router.go(-1); // 返回
   });
