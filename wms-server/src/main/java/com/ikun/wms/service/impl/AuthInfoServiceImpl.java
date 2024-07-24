@@ -23,9 +23,9 @@ public class AuthInfoServiceImpl extends ServiceImpl<AuthInfoMapper, AuthInfo>
     private AuthInfoMapper authInfoMapper;
 
     @Override
-    public List<AuthTree> getAuthTreeByUserId() {
+    public List<AuthTree> getAuthTreeByUserId(Integer userId) {
 
-        return  authInfoMapper.getAuthTreeByUserId();
+        return  authInfoMapper.getAuthTreeByUserId(userId);
     }
 }
 

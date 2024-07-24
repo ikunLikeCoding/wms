@@ -2,6 +2,9 @@ package com.ikun.wms.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.code.kaptcha.Producer;
+import com.ikun.wms.pojo.dto.AuthTree;
+import com.ikun.wms.pojo.entity.User;
+import com.ikun.wms.service.AuthInfoService;
 import com.ikun.wms.utils.Result;
 import jakarta.annotation.Resource;
 import jakarta.annotation.security.PermitAll;
@@ -9,16 +12,15 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +42,9 @@ public class SysController {
 
     @Resource
     private Producer captchaProducer;
+    @Resource
+    private AuthInfoService authInfoService;
+
     @PermitAll
     @RequestMapping("/captcha/captchaImage")
     public Result getKaptchaImage(HttpServletResponse response, HttpServletRequest req) throws Exception {
@@ -79,6 +84,11 @@ public class SysController {
             return Result.success();
         }
         return Result.error("验证码错误");
+    }
+
+    @GetMapping("/allAuth")
+    public Result<List<AuthTree>> authList() {
+        return Result.success(authInfoService.getAuthTreeByUserId(null));
     }
 
 

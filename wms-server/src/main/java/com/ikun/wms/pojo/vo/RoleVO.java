@@ -1,40 +1,35 @@
-package com.ikun.wms.pojo.entity;
+package com.ikun.wms.pojo.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serial;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
- * 角色表
- * @TableName role
+ * @Author: yiwang
+ * @Date: 2024/7/24
  */
-@TableName(value ="role")
+
 @Data
-public class Role implements Serializable {
+public class RoleVO {
     /**
-     * 
+     *
      */
-    @TableId(type = IdType.AUTO)
     private Integer roleId;
 
     /**
-     * 
+     *
      */
     private String roleName;
 
     /**
-     * 
+     *
      */
     private String roleDesc;
 
     /**
-     * 
+     *
      */
     private String roleCode;
 
@@ -44,26 +39,24 @@ public class Role implements Serializable {
     private String roleState;
 
     /**
-     * 
+     *
      */
     private Integer createBy;
 
+    private String createByName;
     /**
-     * 
+     *
      */
     private LocalDateTime createTime;
 
     /**
-     * 
+     *
      */
     private Integer updateBy;
+    private String updateByName;
 
     /**
-     * 
+     *
      */
     private LocalDateTime updateTime;
-
-    @Serial
-    @TableField(exist = false)
-    private static final long serialVersionUID = -5933897424888384420L;
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public interface AuthInfoMapper extends BaseMapper<AuthInfo> {
 
 
-    List<AuthTree> getAuthTreeByUserId();
+    List<AuthTree> getAuthTreeByUserId(Integer userId);
 }
 
 

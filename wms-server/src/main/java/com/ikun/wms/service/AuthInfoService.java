@@ -12,5 +12,5 @@ import java.util.List;
 * @createDate 2024-07-18 16:23:43
 */
 public interface AuthInfoService extends IService<AuthInfo> {
-    List<AuthTree> getAuthTreeByUserId();
+    List<AuthTree> getAuthTreeByUserId(Integer userId);
 }

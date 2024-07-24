@@ -47,8 +47,8 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
     @GetMapping("/auth-list")
     public Result authList() {
-
-        return Result.success(authInfoService.getAuthTreeByUserId());
+        User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Result.success(authInfoService.getAuthTreeByUserId(user.getUserId()));
     }
 
     @GetMapping("/current")

@@ -15,4 +15,6 @@ public class Constants {
 
     public static final String CAPTCHA_URI = "/wms/api/captcha/captchaImage";
     public static final String CAPTCHA_CHECK_URI = "/wms/api/captcha/check";
+
+
 }
