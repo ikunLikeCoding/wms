@@ -3,11 +3,8 @@ package com.ikun.wms.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.BuyList;
 import com.ikun.wms.pojo.entity.InStore;
-<<<<<<< HEAD
 import com.ikun.wms.pojo.vo.BuyListVo;
-=======
 import com.ikun.wms.pojo.entity.User;
->>>>>>> 7a057e4eb6a61fbf80145c13090e47da8ef892d1
 import com.ikun.wms.service.BuyListService;
 import com.ikun.wms.mapper.BuyListMapper;
 import com.ikun.wms.service.InStoreService;
