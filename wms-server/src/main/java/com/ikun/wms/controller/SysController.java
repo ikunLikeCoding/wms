@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.google.code.kaptcha.Producer;
 import com.ikun.wms.pojo.dto.AuthTree;
 import com.ikun.wms.pojo.entity.User;
+import com.ikun.wms.pojo.entity.UserRole;
 import com.ikun.wms.service.AuthInfoService;
+import com.ikun.wms.service.UserRoleService;
+import com.ikun.wms.service.UserService;
 import com.ikun.wms.utils.Result;
 import jakarta.annotation.Resource;
 import jakarta.annotation.security.PermitAll;
@@ -12,6 +15,8 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,12 +44,14 @@ public class SysController {
      * captcha expire time, millis
      */
     private final static long VALID_MILLIS_TIME = 30 * 1000 ;
+    private static final Logger log = LoggerFactory.getLogger(SysController.class);
 
     @Resource
     private Producer captchaProducer;
     @Resource
     private AuthInfoService authInfoService;
-
+    @Resource
+    private UserRoleService userRoleService;
     @PermitAll
     @RequestMapping("/captcha/captchaImage")
     public Result getKaptchaImage(HttpServletResponse response, HttpServletRequest req) throws Exception {
@@ -89,6 +96,17 @@ public class SysController {
     @GetMapping("/allAuth")
     public Result<List<AuthTree>> authList() {
         return Result.success(authInfoService.getAuthTreeByUserId(null));
+    }
+
+    @GetMapping("/permission/check")
+    public Result Permission(@RequestParam("permission") String permission) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<String> roleList = user.getPermissionList();
+        log.info("当前用户权限列表：{}",roleList);
+        if(roleList.contains(permission)){
+            return Result.success(true);
+        }
+        return Result.success(false);
     }
 
 

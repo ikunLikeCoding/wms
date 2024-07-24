@@ -48,12 +48,7 @@ public class Result<T>  implements Serializable {
         return new Result<>(CodeEnum.SUCCESS.getCode(), msg, data);
     }
 
-    public static Result success(String msg){
-        return Result.builder()
-                .code(CodeEnum.SUCCESS.getCode())
-                .msg(msg)
-                .build();
-    }
+
     public static  Result success(CodeEnum codeEnum){
         return Result.builder()
                 .code(codeEnum.getCode())

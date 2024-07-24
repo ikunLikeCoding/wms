@@ -108,18 +108,21 @@ public class User implements Serializable , UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<>();
 
-        if (!ObjectUtils.isEmpty(this.getRoleList())) {
-            this.getRoleList().forEach(role -> {
+        if (!ObjectUtils.isEmpty(this.roleList)) {
+            this.roleList.forEach(role -> {
                 list.add(new SimpleGrantedAuthority(role));
             });
         }
 
-        if(!ObjectUtils.isEmpty(this.getPermissionList())) {
-            this.getPermissionList().forEach(permission -> {
+        if(!ObjectUtils.isEmpty(this.permissionList)) {
+            this.permissionList.forEach(permission -> {
                 list.add(new SimpleGrantedAuthority(permission));
             });
         }
         return list;
+    }
+    public void addPermission(List<String> list){
+        this.permissionList.addAll(list);
     }
 
     @JSONField(serialize = false)

@@ -1,7 +1,9 @@
 package com.ikun.wms;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
+import com.ikun.wms.mapper.UserRoleMapper;
+import com.ikun.wms.pojo.entity.AuthInfo;
+import com.ikun.wms.pojo.entity.Role;
 import com.ikun.wms.pojo.entity.User;
 import com.ikun.wms.pojo.query.UserQuery;
 import com.ikun.wms.pojo.vo.UserVO;
@@ -9,6 +11,8 @@ import com.ikun.wms.service.UserService;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 /**
  * @Author: yiwang
@@ -20,6 +24,8 @@ public class UserTest {
     @Resource
     private UserService userService;
 
+    @Resource
+    private UserRoleMapper userRoleMapper;
     @Test
     public void testFindByUserName() {
         User 超级管理员 = userService.findByUserName("admin");
@@ -37,6 +43,14 @@ public class UserTest {
 //        userQuery.setUserState("1");
         PageInfo<UserVO> userPageList = userService.findUserByPageAndCondition(userQuery);
         System.out.println(userPageList);
+    }
+
+    @Test
+    public void testGetRoleList() {
+        Role role = new Role();
+        role.setRoleId(1);
+        List<AuthInfo> permissionListByRoleName = userRoleMapper.getPermissionListByRoleId(List.of(role));
+        System.out.println(permissionListByRoleName);
     }
 
 }

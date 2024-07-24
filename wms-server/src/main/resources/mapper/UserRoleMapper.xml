@@ -16,4 +16,18 @@
     <delete id="removeByUserId">
         delete from wms.user_role where user_id = #{userId}
     </delete>
+    <select id="getRoleListByUserId" resultMap="com.ikun.wms.mapper.RoleMapper.BaseResultMap" >
+        select role.*  from wms.user_role
+        left join wms.role on user_role.role_id = role.role_id
+        where user_role.user_id = #{userId}
+    </select>
+    <select id="getPermissionListByRoleId" resultMap="com.ikun.wms.mapper.AuthInfoMapper.BaseResultMap" >
+        SELECT auth_info.* from role_auth
+            LEFT JOIN auth_info
+                on role_auth.auth_id = auth_info.auth_id
+        WHERE role_auth.role_id in
+        <foreach collection="roleList" item="role" open="(" separator="," close=")">
+            #{role.roleId}
+        </foreach>
+    </select>
 </mapper>

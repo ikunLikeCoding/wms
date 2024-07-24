@@ -5,8 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ikun.wms.mapper.AuthInfoMapper;
+import com.ikun.wms.mapper.UserRoleMapper;
 import com.ikun.wms.pojo.dto.UserDTO;
+import com.ikun.wms.pojo.entity.AuthInfo;
 import com.ikun.wms.pojo.entity.Role;
 import com.ikun.wms.pojo.entity.User;
 
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -44,6 +44,8 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
 
     @Resource
     private UserRoleService userRoleService;
+    @Resource
+    private UserRoleMapper userRoleMapper;
     @Override
     public User findByUserName(String userCode) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -51,13 +53,20 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
 
         User user = userMapper.selectOne(queryWrapper);
 
-        List<String> roleList = new ArrayList<>();
-        List<Role> list = this.getRoleList(user.getUserId());
-        list.forEach(role -> {
-            roleList.add(role.getRoleName());
-        });
-
+        //获取角色列表
+        List<Role> roles =userRoleMapper.getRoleListByUserId(user.getUserId());
+        List<String> roleList = roles.stream().map(Role::getRoleName).toList();
         user.setRoleList(roleList);
+
+        //获取权限列表
+        List<AuthInfo> authInfos = userRoleMapper.getPermissionListByRoleId(roles);
+        List<String> permissionList = authInfos.stream()
+                .filter(authInfo -> "3".equals(authInfo.getAuthType()))
+                .map(AuthInfo::getAuthCode).toList();
+        user.setPermissionList(permissionList);
+
+        //获取
+//        user.addPermission();
 
         return user;
     }

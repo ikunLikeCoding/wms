@@ -1,7 +1,11 @@
 package com.ikun.wms.mapper;
 
+import com.ikun.wms.pojo.entity.AuthInfo;
+import com.ikun.wms.pojo.entity.Role;
 import com.ikun.wms.pojo.entity.UserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -12,6 +16,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface UserRoleMapper extends BaseMapper<UserRole> {
 
     int removeByUserId(Integer userId);
+
+    List<Role> getRoleListByUserId(Integer userId);
+
+    List<AuthInfo> getPermissionListByRoleId(List<Role> roleList);
 }
 
 
