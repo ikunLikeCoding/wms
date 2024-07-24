@@ -2,7 +2,7 @@
   <h2>权限列表</h2>
   <el-divider></el-divider>
   <div style="padding-bottom: 20px;">
-    <el-button @click="updateAuth">确认修改</el-button>
+    <el-button v-permission="'auth-updateAuth'"  @click="updateAuth">确认修改</el-button>
     <el-button type="primary" @click="goBack">取消</el-button>
   </div>
   <!-- 权限列表 -->

@@ -12,7 +12,7 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="visible=false">取消</el-button>
-        <el-button type="primary" @click="updateUser">确认修改</el-button>
+        <el-button v-permission="'user-updateUser'" type="primary" @click="updateUser">确认修改</el-button>
       </span>
     </template>
   </el-dialog>

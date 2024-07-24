@@ -82,7 +82,7 @@
     <el-table-column type="selection" width="55" />
     <el-table-column label="商品图片">
       <template #default="props">
-          <el-image style="width: 60px; height: 60px" :src="`${$apiBaseUrl}${props.row.imgs}`" fit="fill" />
+          <el-image style="width: 60px; height: 60px" :src="`${API_BASE_URL}${props.row.imgs}`" fit="fill" />
       </template>
     </el-table-column>
     <el-table-column prop="productName" label="商品名称" sortable />
@@ -143,7 +143,7 @@
 
 <script setup>
 import { computed, reactive, ref, watch } from 'vue';
-import { get, post, put, del, tip } from "@/common";
+import {get, post, put, del, tip, API_BASE_URL} from "@/common";
 import { useRouter } from "vue-router";
 import { Search, Edit, Check, Message, Star, Delete } from '@element-plus/icons-vue'
 
