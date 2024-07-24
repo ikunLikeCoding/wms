@@ -182,7 +182,7 @@ const updateState = (user) => {
 // 重置密码
 const resetPwd = (userId) => {
   put(`/user/password-reset/${userId}`).then(result => {
-    tip.success(result.message);
+    tip.success(result.msg);
     // 重新查询
     getUserList();
   });
