@@ -1,5 +1,6 @@
 package com.ikun.wms.utils;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Constants {
@@ -15,6 +16,13 @@ public class Constants {
 
     public static final String CAPTCHA_URI = "/wms/api/captcha/captchaImage";
     public static final String CAPTCHA_CHECK_URI = "/wms/api/captcha/check";
-
+    public static final String STATIC_RESOURCES_URL = "/wms/static/**";
+    public static final List<String> WHITE_URL_LIST = List.of(
+            LOGIN_URI,
+            LOGOUT_URI,
+            CAPTCHA_URI,
+            CAPTCHA_CHECK_URI,
+            STATIC_RESOURCES_URL
+    );
 
 }

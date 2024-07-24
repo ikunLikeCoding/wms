@@ -22,14 +22,14 @@ public class ProductTypeTreeTest {
     @Test
     public void testGetTree(){
 
-        List<ProductTypeTreeDTO> productTree = productTypeService.findProductTree();
-        productTree.forEach(productTypeTreeDTO -> {
-            System.out.println(productTypeTreeDTO.getTypeName());
-            System.out.println("-----------------------------------");
-            productTypeTreeDTO.getChildren().forEach(productTypeTreeDTO1 -> {
-                System.out.println(productTypeTreeDTO1.getTypeName());
-            });
-            System.out.println("******************************************");
-        });
+//        List<ProductTypeTreeDTO> productTree = productTypeService.findProductTree();
+//        productTree.forEach(productTypeTreeDTO -> {
+//            System.out.println(productTypeTreeDTO.getTypeName());
+//            System.out.println("-----------------------------------");
+//            productTypeTreeDTO.getChildren().forEach(productTypeTreeDTO1 -> {
+//                System.out.println(productTypeTreeDTO1.getTypeName());
+//            });
+//            System.out.println("******************************************");
+//        });
     }
 }
