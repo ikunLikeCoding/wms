@@ -134,7 +134,7 @@ const multipleSelection = ref([]);
 // 选中状态改变时的处理
 const handleSelectionChange = (val) => {
   multipleSelection.value = val;
-  console.log(multipleSelection.value);
+  // console.log(multipleSelection.value);
 }
 
 

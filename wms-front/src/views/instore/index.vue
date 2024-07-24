@@ -97,7 +97,7 @@ const getInstorePageList = () => {
   }
   // 后台获取查询结果
   get("/instore/store-page-list", params).then(result => {
-    console.log(result)
+    // console.log(result)
     instorePageList.value = result.data.list;
     params.totalNum = result.data.total;
   });
