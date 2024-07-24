@@ -1,8 +1,10 @@
 package com.ikun.wms.controller;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.dto.AuthTree;
+import com.ikun.wms.pojo.dto.UserDTO;
 import com.ikun.wms.pojo.entity.AuthInfo;
 import com.ikun.wms.pojo.entity.Role;
 import com.ikun.wms.pojo.entity.User;
@@ -18,6 +20,8 @@ import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.encrypt.Encryptors;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -39,6 +43,8 @@ public class UserController {
     private UserService userService;
 
 
+    @Resource
+    private PasswordEncoder passwordEncoder;
     @GetMapping("/auth-list")
     public Result authList() {
 
@@ -119,12 +125,37 @@ public class UserController {
         log.info("获取当前用户的userRoleList:{}",id);
 
         List<Role> roleList = userService.getRoleList(id);
-        return Result.success();
+        return Result.success(roleList);
     }
 
     @PutMapping("/role-assign")
-    public Result roleAssign(@RequestBody User user) {
+    public Result roleAssign(@RequestBody UserDTO user) {
         log.info("角色赋值roleAssign:{}",user);
+        int i = userService.roleAssign(user);
+        if (i == 0) {
+            return Result.error("角色赋值失败");
+        }
         return Result.success();
+    }
+
+
+    /***
+     * 重置密码为123456
+     * @param id 用户id
+     * @return
+     */
+    @PutMapping("/password-reset/{id}")
+    public Result userPwdReset(@PathVariable("id") Integer id) {
+        log.info("userPwdReset:{}",id);
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set("user_pwd",passwordEncoder.encode("123456"));
+        updateWrapper.eq("user_id",id);
+        boolean update = userService.update(updateWrapper);
+
+        if(!update) {
+            return Result.error("重置失败");
+        }
+
+        return Result.success("重置成功");
     }
 }

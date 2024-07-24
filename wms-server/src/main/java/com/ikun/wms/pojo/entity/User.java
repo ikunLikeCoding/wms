@@ -149,6 +149,6 @@ public class User implements Serializable , UserDetails {
     @JSONField(serialize = false)
     @Override
     public boolean isEnabled() {
-        return true;
+        return "1".equals(userState);
     }
 }

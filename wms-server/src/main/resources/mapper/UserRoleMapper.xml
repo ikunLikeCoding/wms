@@ -13,4 +13,7 @@
     <sql id="Base_Column_List">
         user_role_id,role_id,user_id
     </sql>
+    <delete id="removeByUserId">
+        delete from wms.user_role where user_id = #{userId}
+    </delete>
 </mapper>

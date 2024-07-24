@@ -18,6 +18,22 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+
+    <resultMap id="UserVoResultMap" type="com.ikun.wms.pojo.vo.UserVO">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
+        <result property="userType" column="user_type" jdbcType="CHAR"/>
+        <result property="userState" column="user_state" jdbcType="CHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+        <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <collection property="createByCode" column="createByCode" jdbcType="VARCHAR"/>
+     </resultMap>
+
     <sql id="Base_Column_List">
         user_id,user_code,user_name,
         user_pwd,user_type,user_state,
@@ -25,8 +41,8 @@
         update_by,update_time
     </sql>
     <select id="findUserByPageAndCondition" parameterType="com.ikun.wms.pojo.query.UserQuery"
-            resultType="com.ikun.wms.pojo.vo.UserVO">
-        select ui.user_id,
+           resultType="com.ikun.wms.pojo.vo.UserVO">
+        select DISTINCT ui.user_id,
                ui.user_code,
                ui.user_name,
                ui.user_state,
