@@ -70,14 +70,7 @@
     </div>
   </div>
 
-  <!-- 下载文件方式1--映射磁盘文件 -->
-  <!-- <el-link :href="`${$apiBaseUrl}/whimg/e252948f24264256951e270f64f2fba9.jpeg`" target="_blank">获取图片</el-link>
-  <el-link :href="`${$apiBaseUrl}/whimg/jdk.exe`" target="_blank">下载文件</el-link> -->
-  
-  <!-- 下载文件方式2--IO流读写 -->
-  <!-- <el-link :href="`${$apiBaseUrl}/product/download/MicrosoftOffice2010.zip`" target="_blank">下载文件3</el-link> -->
-
-  <!-- 表格 -->
+g
   <el-table ref="multipleTableRef" :data="commodityPageList" @selection-change="handleSelectionChange" style="width: 100%; margin-top: 10px;" table-layout="auto" size="large" border stripe>
     <el-table-column type="selection" width="55" />
     <el-table-column label="商品图片">
