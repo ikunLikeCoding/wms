@@ -5,11 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.Store;
 import com.ikun.wms.pojo.query.InStoreQuery;
-import com.ikun.wms.pojo.query.StoreQuery;
 import com.ikun.wms.pojo.vo.InStoreVO;
 import com.ikun.wms.service.StoreService;
 import com.ikun.wms.mapper.StoreMapper;
 import jakarta.annotation.Resource;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,15 +32,11 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store>
         List<InStoreVO> storeByPageAndCondition = storeMapper.findStoreByPageAndCondition(inStoreQuery);
         return new PageInfo<>(storeByPageAndCondition);
     }
-
+    @Cacheable(key = "'all:store'")
     @Override
-    public List<Store> findPageStore(StoreQuery storeQuery) {
-        return storeMapper.findPageStore(storeQuery);
-    }
-
-    @Override
-    public Store findStoreByNum(String storeNum) {
-        return storeMapper.findStoreByNum(storeNum);
+    public List<Store> queryAllStore() {
+        //查询所有仓库
+        return storeMapper.findAllStore();
     }
 }
 

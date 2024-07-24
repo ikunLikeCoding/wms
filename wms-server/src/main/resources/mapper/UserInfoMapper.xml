@@ -40,6 +40,9 @@
         is_delete,create_by,create_time,
         update_by,update_time
     </sql>
+<<<<<<< HEAD
+
+=======
     <select id="findUserByPageAndCondition" parameterType="com.ikun.wms.pojo.query.UserQuery"
            resultType="com.ikun.wms.pojo.vo.UserVO">
         select DISTINCT ui.user_id,
@@ -71,4 +74,5 @@
         left join wms.user_role on wms.role.role_id = wms.user_role.role_id
         where wms.user_role.user_id = #{userId,jdbcType=INTEGER}
     </select>
+>>>>>>> 16fe1adfc08435feda64ea79816e2021374550b1
 </mapper>

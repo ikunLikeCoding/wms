@@ -13,4 +13,12 @@
     <sql id="Base_Column_List">
         unit_id,unit_name,unit_desc
     </sql>
+    <!--
+     //查询所有单位的方法
+     public List<Unit> findAllUnit()
+   -->
+    <select id="findAllUnit" resultType="com.ikun.wms.pojo.entity.Unit">
+        select * from unit
+    </select>
+
 </mapper>

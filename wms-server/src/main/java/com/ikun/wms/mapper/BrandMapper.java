@@ -3,6 +3,8 @@ package com.ikun.wms.mapper;
 import com.ikun.wms.pojo.entity.Brand;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
 * @author yiwan
 * @description 针对表【brand(品牌)】的数据库操作Mapper
@@ -10,7 +12,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.ikun.wms.pojo.entity.Brand
 */
 public interface BrandMapper extends BaseMapper<Brand> {
-
+    //查询所有品牌的方法
+    public List<Brand> findAllBrand();
 }
 
 
