@@ -64,7 +64,7 @@
     @size-change="changeSize"
     @current-change="changeCurrent"
   />
-  
+
 </template>
 
 <script setup>

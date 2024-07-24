@@ -3,6 +3,7 @@ package com.ikun.wms.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.BuyList;
 import com.ikun.wms.pojo.entity.InStore;
+import com.ikun.wms.pojo.vo.BuyListVo;
 import com.ikun.wms.service.BuyListService;
 import com.ikun.wms.mapper.BuyListMapper;
 import com.ikun.wms.service.InStoreService;
@@ -31,8 +32,8 @@ public class BuyListServiceImpl extends ServiceImpl<BuyListMapper, BuyList>
     }
 
     @Override
-    public List<BuyList> findpurchaseList(BuyList buyList) {
-        return buyListMapper.findpurchaseList(buyList);
+    public List<BuyListVo> findpurchaseList(BuyListVo buyListVo) {
+        return buyListMapper.findpurchaseList(buyListVo);
     }
 
     @Override

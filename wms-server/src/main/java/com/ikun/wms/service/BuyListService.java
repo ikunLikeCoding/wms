@@ -2,6 +2,7 @@ package com.ikun.wms.service;
 
 import com.ikun.wms.pojo.entity.BuyList;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ikun.wms.pojo.vo.BuyListVo;
 import com.ikun.wms.utils.Result;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface BuyListService extends IService<BuyList> {
     public int purchaseAdd(BuyList buyList);
 
-    public List<BuyList> findpurchaseList(BuyList buyList);
+    public List<BuyListVo> findpurchaseList(BuyListVo buyListVo);
 
     public int purchaseUpdate(BuyList buyList);
 

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.BuyList;
 import com.ikun.wms.pojo.entity.InStore;
+import com.ikun.wms.pojo.vo.BuyListVo;
 import com.ikun.wms.service.BuyListService;
 import com.ikun.wms.service.StoreService;
 import com.ikun.wms.utils.Result;
@@ -27,22 +28,22 @@ public class PurchaseController {
         buyListService.purchaseAdd(buyList);
         return Result.success();
     }
-    @RequestMapping("/purchase-list")
+    @RequestMapping("/store-list")
     public Result storeList(){
         return Result.success(storeService.list());
     }
 
     /**
-     * 分页查询
+     * 采购列表
      * @param currentPage
      * @param pageSize
-     * @param buyList
+     * @param buyListvo
      * @return
      */
     @RequestMapping("/purchase-page-list")
-    public Result storeListPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestBody BuyList buyList){
+    public Result storeListPage(int currentPage, int pageSize, BuyListVo buyListvo){
         PageHelper.startPage(currentPage, pageSize);
-        PageInfo<BuyList> pageInfo = new PageInfo<>(buyListService.findpurchaseList(buyList));
+        PageInfo<BuyListVo> pageInfo = new PageInfo<>(buyListService.findpurchaseList(buyListvo));
         return Result.success(pageInfo);
     }
 

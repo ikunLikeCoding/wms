@@ -63,16 +63,15 @@
   <!-- 分页 -->
   <el-pagination
     background
-    :total="params.totalNum"
+    :total="params.total"
     :page-sizes="[5, 10, 15, 20, 25, 30]"
     v-model:page-size="params.pageSize"
-    v-model:currentPage="params.pageNum"
+    v-model:currentPage="params.currentPage"
     layout="total, sizes, prev, pager, next, jumper"
     style="margin-top: 20px;"
     @size-change="changeSize"
     @current-change="changeCurrent"
   />
-
   <!-- 修改采购单对话框 -->
   <purchase-update ref="purchaseUpdateRef" @ok="getPurchasePageList"></purchase-update>
 
@@ -95,8 +94,8 @@ const params = reactive({
   buyUser: '',
   isIn: '',
   pageSize: 5,
-  pageNum: 1,
-  totalNum: 0
+  currentPage: 1,
+  total: 0
 })
 
 // 表格数据
@@ -110,8 +109,8 @@ const getPurchasePageList = () => {
   }
   // 后台获取查询结果
   get("/purchase/purchase-page-list", params).then(result => {
-    purchasePageList.value = result.data.resultList;
-    params.totalNum = result.data.totalNum;
+    purchasePageList.value = result.data.list;
+    params.total = result.data.total;
   });
 }
 getPurchasePageList();
@@ -162,7 +161,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getPurchasePageList();
 }
