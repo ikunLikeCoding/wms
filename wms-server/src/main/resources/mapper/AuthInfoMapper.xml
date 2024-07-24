@@ -60,12 +60,16 @@
                 LEFT JOIN role_auth ON role_auth.auth_id = auth_info.auth_id
                 LEFT JOIN user_role ON user_role.role_id = role_auth.role_id = user_role.role_id
                 LEFT JOIN auth_info sub ON sub.parent_id = auth_info.auth_id
-        WHERE
-            user_id = 1
-          AND sub.auth_url != ''
-          AND sub.auth_url IS NOT NULL
-          and auth_info.auth_state =1
-          and(auth_info.auth_url is  NULL or auth_info.auth_url = '')
+        <where>
+            <if test="userId != null">
+              and  user_id = #{userId,jdbcType=INTEGER}
+            </if>
+            AND sub.auth_url != ''
+            AND sub.auth_url IS NOT NULL
+            and auth_info.auth_state =1
+            and(auth_info.auth_url is  NULL or auth_info.auth_url = '')
+        </where>
+
     </select>
 
 </mapper>

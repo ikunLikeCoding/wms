@@ -28,6 +28,12 @@ public class Result<T>  implements Serializable {
                 .build();
     }
 
+    public static Result success(String msg){
+        return Result.builder()
+                .code(CodeEnum.SUCCESS.getCode())
+                .msg(msg)
+                .build();
+    }
 
 
     public static <T> Result<T> success(T data){

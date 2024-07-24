@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.UserRole;
 import com.ikun.wms.service.UserRoleService;
 import com.ikun.wms.mapper.UserRoleMapper;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,13 @@ import org.springframework.stereotype.Service;
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole>
     implements UserRoleService{
 
+    @Resource
+    private UserRoleMapper userRoleMapper;
+    @Override
+    public int removeByUserId(Integer userId) {
+
+        return userRoleMapper.removeByUserId(userId);
+    }
 }
 
 

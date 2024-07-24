@@ -31,7 +31,7 @@ public class User implements Serializable , UserDetails {
     private Integer userId;
 
     /**
-     * 
+     * 账号
      */
     private String userCode;
 
@@ -43,11 +43,14 @@ public class User implements Serializable , UserDetails {
     /**
      * 
      */
+    @JSONField(serialize = false)
     private String userPwd;
 
     /**
      * 1 超级管理员 、 2  管理员 、 3 普通用户
      */
+    @JSONField(serialize = false)
+
     private String userType;
 
     /**
@@ -122,12 +125,11 @@ public class User implements Serializable , UserDetails {
     @JSONField(serialize = false)
     @Override
     public String getPassword() {
-        return getUserPwd();
+        return this.userPwd;
     }
-    @JSONField(serialize = false)
     @Override
     public String getUsername() {
-        return getUserCode();
+        return this.userName;
     }
     @JSONField(serialize = false)
     @Override
@@ -147,6 +149,6 @@ public class User implements Serializable , UserDetails {
     @JSONField(serialize = false)
     @Override
     public boolean isEnabled() {
-        return true;
+        return "1".equals(userState);
     }
 }

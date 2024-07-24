@@ -2,7 +2,7 @@
   <!-- 添加用户对话框 -->
   <el-dialog v-model="visible" title="添加用户" width="25%" @close="close" destroy-on-close>
     <el-form ref="userAddForm" :model="userAdd" :rules="rules" label-position="top">
-      <el-form-item label="用户名：" prop="userCode">
+      <el-form-item label="账号：" prop="userCode">
         <el-input v-model="userAdd.userCode" autocomplete="off" />
       </el-form-item>
       <el-form-item label="昵称：" prop="userName">
@@ -50,7 +50,7 @@ const close = () => {
 const validateUserCode = (rule, userCode, callback) => {
   if(userCode==='') callback(new Error('请输入用户编号！'));
   get(`/user/user-code-verify?userCode=${userCode}`).then(res => {
-    if(!res.data){
+    if(res.data === false){
       callback(new Error('用户编号已存在！'));
     }else{
       // 这块的else分支必须加，保证所有结果res都有回调callback

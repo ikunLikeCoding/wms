@@ -3,12 +3,17 @@ package com.ikun.wms.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.BuyList;
 import com.ikun.wms.pojo.entity.InStore;
+<<<<<<< HEAD
 import com.ikun.wms.pojo.vo.BuyListVo;
+=======
+import com.ikun.wms.pojo.entity.User;
+>>>>>>> 7a057e4eb6a61fbf80145c13090e47da8ef892d1
 import com.ikun.wms.service.BuyListService;
 import com.ikun.wms.mapper.BuyListMapper;
 import com.ikun.wms.service.InStoreService;
 import com.ikun.wms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,12 +47,15 @@ public class BuyListServiceImpl extends ServiceImpl<BuyListMapper, BuyList>
     }
 
     @Override
-    public int saveInStore(BuyList buyList, int userId) {
+    public int saveInStore(BuyList buyList) {
+
+        User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         InStore inStore=new InStore();
         inStore.setStoreId(buyList.getStoreId());
         inStore.setProductId(buyList.getProductId());
         inStore.setInNum(buyList.getFactBuyNum());
-        inStore.setCreateBy(userId);
+        inStore.setCreateBy(user.getUserId());
         boolean i = inStoreService.save(inStore);
         if(i){
             //根据id将采购单状态改为已入库

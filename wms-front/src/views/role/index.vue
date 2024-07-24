@@ -44,7 +44,7 @@
             <span :class="{red:props.row.roleState=='0'}">{{props.row.roleState=="0"?"禁用":"启用"}}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="creatorCode" label="创建人" sortable />
+      <el-table-column prop="createByName" label="创建人" sortable />
       <el-table-column prop="createTime" label="创建时间" sortable />
       <el-table-column label="操作">
         <template #default="props">
@@ -59,10 +59,10 @@
     <!-- 分页 -->
     <el-pagination
       background
-      :total="params.totalNum"
+      :total="params.total"
       :page-sizes="[5, 10, 15, 20, 25, 30]"
       v-model:page-size="params.pageSize"
-      v-model:currentPage="params.pageNum"
+      v-model:currentPage="params.currentPage"
       layout="total, sizes, prev, pager, next, jumper"
       style="margin-top: 20px;"
       @size-change="changeSize"
@@ -91,8 +91,8 @@ const params = reactive({
   roleCode: '',
   roleState: '',
   pageSize: 5,
-  pageNum: 1,
-  totalNum: 0
+  currentPage: 1,
+  total: 0
 })
 
 // 表格数据
@@ -101,8 +101,8 @@ const rolePageList = ref();
 // 获取分页模糊查询结果
 const getRoleList = () => {
   get("/role/role-page-list", params).then(result => {
-    rolePageList.value = result.data.resultList;
-    params.totalNum = result.data.totalNum;
+    rolePageList.value = result.data.list;
+    params.total = result.data.total;
   });
 }
 getRoleList();
@@ -155,7 +155,7 @@ const changeSize = (size) => {
 }
 // 修改当前页码
 const changeCurrent = (num) => {
-  params.pageNum = num;
+  params.currentPage = num;
   // 重新查询
   getRoleList();
 }

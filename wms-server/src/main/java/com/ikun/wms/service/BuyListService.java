@@ -19,5 +19,5 @@ public interface BuyListService extends IService<BuyList> {
 
     public int purchaseUpdate(BuyList buyList);
 
-    public int saveInStore(BuyList buyList,int userId);
+    public int saveInStore(BuyList buyList);
 }

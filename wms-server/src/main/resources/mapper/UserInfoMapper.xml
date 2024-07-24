@@ -18,10 +18,57 @@
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+
+    <resultMap id="UserVoResultMap" type="com.ikun.wms.pojo.vo.UserVO">
+        <id property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userPwd" column="user_pwd" jdbcType="VARCHAR"/>
+        <result property="userType" column="user_type" jdbcType="CHAR"/>
+        <result property="userState" column="user_state" jdbcType="CHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+        <result property="createBy" column="create_by" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <collection property="createByCode" column="createByCode" jdbcType="VARCHAR"/>
+     </resultMap>
+
     <sql id="Base_Column_List">
         user_id,user_code,user_name,
         user_pwd,user_type,user_state,
         is_delete,create_by,create_time,
         update_by,update_time
     </sql>
+    <select id="findUserByPageAndCondition" parameterType="com.ikun.wms.pojo.query.UserQuery"
+           resultType="com.ikun.wms.pojo.vo.UserVO">
+        select DISTINCT ui.user_id,
+               ui.user_code,
+               ui.user_name,
+               ui.user_state,
+                cb.user_code as createByCode,
+                ui.create_time
+        from wms.user_info ui
+        left join wms.user_info cb on  ui.create_by = cb.user_id
+        left join wms.user_role on ui.user_id = user_role.user_id
+        <where>
+            <if test="userName != null and userName != ''">
+                and ui.user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="userState != null and userState != ''">
+                and ui.user_state like concat('%',#{userState,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="roleId != null and roleId !=''">
+              and user_role.role_id = #{roleId,jdbcType=VARCHAR}
+            </if>
+            <if test="true">
+                and ui.is_delete = 0
+            </if>
+        </where>
+    </select>
+    <select id="getRoleList" resultMap="com.ikun.wms.mapper.RoleMapper.BaseResultMap" >
+        select * from wms.role
+        left join wms.user_role on wms.role.role_id = wms.user_role.role_id
+        where wms.user_role.user_id = #{userId,jdbcType=INTEGER}
+    </select>
 </mapper>

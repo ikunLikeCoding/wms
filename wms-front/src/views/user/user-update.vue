@@ -45,7 +45,7 @@ const emit = defineEmits(["ok"]);
 const updateUser = () => {
   userUpdateForm.value.validate(valid => {
     if(valid){
-      put('/user/user-update', userUpdate).then(result => {
+      put('/user', userUpdate).then(result => {
         emit('ok');
         tip.success(result.message);
         visible.value = false; // 关闭对话框

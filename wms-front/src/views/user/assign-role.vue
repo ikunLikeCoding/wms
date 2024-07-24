@@ -83,7 +83,7 @@ const assignRole = () => {
   userAssignRoleRef.value.validate(valid => {
     if(valid){
       put('/user/role-assign', userAssignRole).then(result => {
-        tip.success(result.message);
+        tip.success(result.msg);
         visible.value = false;
       });
     }

@@ -32,7 +32,7 @@ class WmsApplicationTests {
 
     @Test
     public void test1() {
-        List<AuthTree> authTreeByUserId = authInfoMapper.getAuthTreeByUserId();
+        List<AuthTree> authTreeByUserId = authInfoMapper.getAuthTreeByUserId(null);
         authTreeByUserId.forEach(authTree -> {
             System.out.println(authTree.getAuthName()+"  "+authTree.getAuthUrl());
             System.out.println(authTree.getChildAuth());

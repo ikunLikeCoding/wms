@@ -22,8 +22,8 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import { post, tip } from "@/common";
+import { ref, reactive } from 'vue';
+import { get, post, del, tip } from "@/common";
 
 const visible = ref(false); // 该页面的可见性
 // 添加角色对象
@@ -44,10 +44,11 @@ const close = () => {
 // 验证角色编号的唯一性
 const validateRoleCode = (rule, roleCode, callback) => {
   if(roleCode==='') callback(new Error('请输入角色编号！'));
-  get(`/role/role-code-verify?roleCode=${roleCode}`).then(res => {
-    if(!res.data){
+  get(`/role/role-code-verify/${roleCode}`).then(res => {
+    if(res.data === false){
       callback(new Error('角色编号已存在！'));
     }else{
+      // alert('验证成功！')
       callback();
     }
   })
