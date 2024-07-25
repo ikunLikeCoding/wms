@@ -70,7 +70,7 @@
       <el-header>
         <div class="header_left">
           <img src="/warehouse.png" width="40" height="40" />
-          <span style="font-weight: bold;">&nbsp;恒合仓库管理系统</span>
+          <span style="font-weight: bold;">&nbsp;IKUN仓库管理系统</span>
         </div>
         <div class="header_right">
           <span>当前用户：{{`${currUser.userCode}【${currUser.username}】`}}</span>
@@ -90,7 +90,7 @@
         <!-- home.vue的子组件显示位置 -->
         <router-view></router-view>
       </el-main>
-      <el-footer>版权所有&nbsp;&copy;2000-2022&nbsp; 恒合智能仓储科技有限公司</el-footer>
+      <el-footer>版权所有&nbsp;&copy;2000-2024&nbsp; IKUN智能仓储科技有限公司</el-footer>
     </el-container>
   </el-container>
 </template>
