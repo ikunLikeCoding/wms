@@ -5,15 +5,22 @@
 <mapper namespace="com.ikun.wms.mapper.PlaceMapper">
 
     <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.Place">
-            <id property="placeId" column="place_id" jdbcType="INTEGER"/>
-            <result property="placeName" column="place_name" jdbcType="VARCHAR"/>
-            <result property="placeNum" column="place_num" jdbcType="VARCHAR"/>
-            <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
-            <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
+        <id property="placeId" column="place_id" jdbcType="INTEGER"/>
+        <result property="placeName" column="place_name" jdbcType="VARCHAR"/>
+        <result property="placeNum" column="place_num" jdbcType="VARCHAR"/>
+        <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="CHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         place_id,place_name,place_num,
         introduce,is_delete
     </sql>
+    <!--
+      //查询所有产地
+      public List<Place> findAllPlace()
+    -->
+    <select id="findAllPlace" resultType="com.ikun.wms.pojo.entity.Place">
+        select * from place
+    </select>
 </mapper>

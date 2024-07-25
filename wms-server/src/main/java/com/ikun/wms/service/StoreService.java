@@ -20,4 +20,6 @@ public interface StoreService extends IService<Store> {
     PageInfo<InStoreVO> findStoreByPageAndCondition(InStoreQuery inStoreQuery);
     List<Store> findPageStore(StoreQuery storeQuery);
     Store findStoreByNum(String storeNum);
+    //查询所有仓库的业务方法
+    List<Store> queryAllStore();
 }

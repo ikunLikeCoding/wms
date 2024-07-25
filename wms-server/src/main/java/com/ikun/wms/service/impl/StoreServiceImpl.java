@@ -42,6 +42,11 @@ public class StoreServiceImpl extends ServiceImpl<StoreMapper, Store>
     public Store findStoreByNum(String storeNum) {
         return storeMapper.findStoreByNum(storeNum);
     }
+    @Override
+    public List<Store> queryAllStore() {
+        //查询所有仓库
+        return storeMapper.selectList(null);
+    }
 }
 
 

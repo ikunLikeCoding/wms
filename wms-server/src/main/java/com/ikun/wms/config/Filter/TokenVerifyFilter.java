@@ -25,9 +25,10 @@ public class TokenVerifyFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,@NonNull HttpServletResponse response,@NonNull FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("currentUrl"+request.getRequestURI());
+
         if(Constants.WHITE_URL_LIST.contains(request.getRequestURI())||
                 request.getRequestURI().contains("/img/upload/")){
+            System.out.println("currentUrl"+request.getRequestURI());
             filterChain.doFilter(request,response);
         }else {
             //从前端请求中获取token

@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.Place;
 import com.ikun.wms.service.PlaceService;
 import com.ikun.wms.mapper.PlaceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -14,6 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlaceServiceImpl extends ServiceImpl<PlaceMapper, Place>
     implements PlaceService{
+    @Autowired
+    private PlaceMapper placeMapper;
+
+    /*
+      查询所有产地的业务方法
+     */
+    //对查询到的所有产地进行缓存,缓存到redis的键为all:place
+    @Override
+    public List<Place> queryAllPlace() {
+        //查询所有产地
+        return placeMapper.findAllPlace();
+    }
 
 }
 

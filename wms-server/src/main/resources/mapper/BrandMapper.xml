@@ -5,14 +5,21 @@
 <mapper namespace="com.ikun.wms.mapper.BrandMapper">
 
     <resultMap id="BaseResultMap" type="com.ikun.wms.pojo.entity.Brand">
-            <id property="brandId" column="brand_id" jdbcType="INTEGER"/>
-            <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
-            <result property="brandLeter" column="brand_leter" jdbcType="CHAR"/>
-            <result property="brandDesc" column="brand_desc" jdbcType="VARCHAR"/>
+        <id property="brandId" column="brand_id" jdbcType="INTEGER"/>
+        <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+        <result property="brandLeter" column="brand_leter" jdbcType="CHAR"/>
+        <result property="brandDesc" column="brand_desc" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         brand_id,brand_name,brand_leter,
         brand_desc
     </sql>
+    <!--
+     //查询所有品牌的方法
+     public List<Brand> findAllBrand()
+   -->
+    <select id="findAllBrand" resultType="com.ikun.wms.pojo.entity.Brand">
+        select * from brand
+    </select>
 </mapper>

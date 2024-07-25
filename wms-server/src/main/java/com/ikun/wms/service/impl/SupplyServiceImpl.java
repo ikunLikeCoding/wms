@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ikun.wms.pojo.entity.Supply;
 import com.ikun.wms.service.SupplyService;
 import com.ikun.wms.mapper.SupplyMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author yiwan
@@ -14,6 +17,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class SupplyServiceImpl extends ServiceImpl<SupplyMapper, Supply>
     implements SupplyService{
+    @Autowired
+    private SupplyMapper supplyMapper;
+
+    /*
+      查询所有供应商的业务方法
+     */
+    //对查询到的所有供应商进行缓存,缓存到redis的键为all:supply
+    @Override
+    public List<Supply> queryAllSupply() {
+        //查询所有供应商
+        return supplyMapper.selectList(null);
+    }
 
 }
 

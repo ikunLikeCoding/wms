@@ -20,4 +20,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: true
 
-
+file:
+  upload-path: classpath:static/img/upload
+  access-path: /img/upload/
