@@ -53,23 +53,22 @@
             auth_info.auth_name,
             sub.auth_id as sub_auth_id,
             sub.auth_url AS sub_auth_url,
-                sub.auth_name AS sub_auth_name ,
+            sub.auth_name AS sub_auth_name ,
             sub.parent_id as parent_id
         FROM
             auth_info
                 LEFT JOIN role_auth ON role_auth.auth_id = auth_info.auth_id
-                LEFT JOIN user_role ON user_role.role_id = role_auth.role_id = user_role.role_id
                 LEFT JOIN auth_info sub ON sub.parent_id = auth_info.auth_id
+                LEFT JOIN user_role on user_role.role_id = role_auth.role_id
         <where>
+            sub.auth_url != ''
+              AND sub.auth_url IS NOT NULL
+              and auth_info.auth_state =1
+              and (auth_info.auth_url is  NULL or auth_info.auth_url = '')
             <if test="userId != null">
-              and  user_id = #{userId,jdbcType=INTEGER}
+                and user_role.user_id = #{userId}
             </if>
-            AND sub.auth_url != ''
-            AND sub.auth_url IS NOT NULL
-            and auth_info.auth_state =1
-            and(auth_info.auth_url is  NULL or auth_info.auth_url = '')
         </where>
-
     </select>
 
 </mapper>

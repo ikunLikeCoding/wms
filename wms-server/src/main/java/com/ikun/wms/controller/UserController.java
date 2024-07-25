@@ -48,7 +48,8 @@ public class UserController {
     @GetMapping("/auth-list")
     public Result authList() {
         User user =(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Result.success(authInfoService.getAuthTreeByUserId(user.getUserId()));
+        List<AuthTree> authTreeByUserId = authInfoService.getAuthTreeByUserId(user.getUserId());
+        return Result.success(authTreeByUserId);
     }
 
     @GetMapping("/current")
