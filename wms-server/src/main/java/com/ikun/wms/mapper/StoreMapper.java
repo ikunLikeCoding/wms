@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.ikun.wms.pojo.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ikun.wms.pojo.query.InStoreQuery;
+import com.ikun.wms.pojo.query.StoreQuery;
 import com.ikun.wms.pojo.vo.InStoreVO;
 
 import java.util.List;
@@ -17,9 +18,8 @@ import java.util.List;
 public interface StoreMapper extends BaseMapper<Store> {
 
     List<InStoreVO> findStoreByPageAndCondition(InStoreQuery inStoreQuery);
-    //查询所有仓库的方法
-    public List<Store> findAllStore();
-
+    List<Store> findPageStore(StoreQuery storeQuery);
+    Store findStoreByNum(String storeNum);
 }
 
 

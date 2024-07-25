@@ -21,6 +21,3 @@ mybatis-plus:
     cache-enabled: true
 
 
-file:
-  upload-path: classpath:static/img/upload
-  access-path: /img/upload/

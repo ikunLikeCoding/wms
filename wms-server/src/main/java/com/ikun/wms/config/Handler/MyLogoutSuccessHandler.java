@@ -27,7 +27,7 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         //退出成功，执行该方法，在该方法中返回json给前端，就行了
-        User user = (User)authentication.getPrincipal();
+
 
         SecurityContextHolder.clearContext();
 

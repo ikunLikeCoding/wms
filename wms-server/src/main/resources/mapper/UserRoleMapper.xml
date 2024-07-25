@@ -25,9 +25,14 @@
         SELECT auth_info.* from role_auth
             LEFT JOIN auth_info
                 on role_auth.auth_id = auth_info.auth_id
-        WHERE role_auth.role_id in
-        <foreach collection="roleList" item="role" open="(" separator="," close=")">
-            #{role.roleId}
-        </foreach>
+       <where>
+           <if test="roleList != null || roleList.size() > 0">
+               role_auth.role_id in
+               <foreach collection="roleList" item="role" open="(" separator="," close=")">
+                   #{role.roleId}
+               </foreach>
+           </if>
+
+       </where>
     </select>
 </mapper>

@@ -20,11 +20,4 @@
         supply_introduce,concat,phone,
         address,is_delete
     </sql>
-    <!--
-    //查询所有供应商的方法
-    public List<Supply> findAllSupply()
-  -->
-    <select id="findAllSupply" resultType="com.ikun.wms.pojo.entity.Supply">
-        select * from supply
-    </select>
 </mapper>

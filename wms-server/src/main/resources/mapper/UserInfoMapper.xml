@@ -40,7 +40,10 @@
         is_delete,create_by,create_time,
         update_by,update_time
     </sql>
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 57ef214 (a)
     <select id="findUserByPageAndCondition" parameterType="com.ikun.wms.pojo.query.UserQuery"
            resultType="com.ikun.wms.pojo.vo.UserVO">
         select DISTINCT ui.user_id,

@@ -3,8 +3,6 @@ package com.ikun.wms.mapper;
 import com.ikun.wms.pojo.entity.Supply;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-import java.util.List;
-
 /**
 * @author yiwan
 * @description 针对表【supply(供货商)】的数据库操作Mapper
@@ -12,8 +10,7 @@ import java.util.List;
 * @Entity com.ikun.wms.pojo.entity.Supply
 */
 public interface SupplyMapper extends BaseMapper<Supply> {
-    //查询所有供应商的方法
-    public List<Supply> findAllSupply();
+
 }
 
 

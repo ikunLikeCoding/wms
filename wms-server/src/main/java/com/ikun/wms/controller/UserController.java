@@ -68,6 +68,7 @@ public class UserController {
     public Result userAdd(@RequestBody User user) {
         log.info("addUser:{}",user);
         User current = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        user.setUserPwd(passwordEncoder.encode(user.getUserPwd()));
         user.setCreateBy(current.getUserId());
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateBy(current.getUserId());
@@ -84,7 +85,8 @@ public class UserController {
     @GetMapping("/user-code-verify")
     public Result userCodeVerify(String userCode) {
         log.info("userCode:{}",userCode);
-        if (userService.findByUserName(userCode) != null) {
+        User user = userService.getOne(new UpdateWrapper<User>().eq("user_code", userCode));
+        if (user != null) {
             return Result.success(false,"用户名已存在");
         }
         return Result.success();

@@ -12,51 +12,32 @@
             <result property="typeDesc" column="type_desc" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="ProductTypeTreeDTOMap" type="com.ikun.wms.pojo.dto.ProductTypeTreeDTO">
+        <id property="typeId" column="type_id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="typeCode" column="type_code" jdbcType="VARCHAR"/>
+        <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
+        <result property="typeDesc" column="type_desc" jdbcType="VARCHAR"/>
+        <collection property="children"
+                    ofType="com.ikun.wms.pojo.dto.ProductTypeTreeDTO"
+                    columnPrefix="sec_"
+                    resultMap="ProductTypeTreeDTOMap"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         type_id,parent_id,type_code,
         type_name,type_desc
     </sql>
-    <!--
-      //查询所有商品分类的方法
-      public List<ProductType> findAllProductType()
-    -->
-    <select id="findAllProductType" resultType="com.ikun.wms.pojo.entity.ProductType">
-        select * from product_type
+    <select id="getProductTypeTree" resultMap="ProductTypeTreeDTOMap">
+            select  pt.*,
+                    sec_node.type_id as sec_type_id,
+                    sec_node.parent_id as sec_parent_id,
+                    sec_node.type_code as sec_type_code,
+                    sec_node.type_name as sec_type_name,
+                    sec_node.type_desc as sec_type_desc
+            from
+                wms.product_type pt
+                    left join wms.product_type sec_node on pt.type_id = sec_node.parent_id
+            where pt.parent_id = 0
     </select>
-
-    <!--
-      //根据分类编码查询商品分类的方法
-      public ProductType findTypeByCode(String typeCode)
-    -->
-    <select id="findTypeByCode" resultType="com.ikun.wms.pojo.entity.ProductType">
-        select * from product_type where type_code = #{typeCode}
-    </select>
-
-    <!--
-      //添加商品分类的方法
-      public int insertProductType(ProductType productType)
-    -->
-    <insert id="insertProductType">
-        insert into product_type values(
-                                           null, #{parentId}, #{typeCode}, #{typeName}, #{typeDesc}
-                                       )
-    </insert>
-
-    <!--
-      //根据分类id删除分类及其所有子级分类的方法
-      public int deleteProductType(Integer typeId)
-    -->
-    <delete id="deleteProductType">
-        delete from product_type where type_id = #{typeId} or parent_id = #{typeId}
-    </delete>
-
-    <!--
-      //根据分类id修改分类的方法
-      public int updateTypeById(ProductType productType)
-    -->
-    <update id="updateTypeById">
-        update product_type set
-                                type_name = #{typeName}, type_desc = #{typeDesc}
-        where type_id = #{typeId}
-    </update>
 </mapper>

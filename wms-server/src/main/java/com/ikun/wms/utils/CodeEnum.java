@@ -21,7 +21,7 @@ public enum CodeEnum {
     NO_PASSWORD(405,"密码错误"),
     TOKEN_EXPIRED(406,"身份信息过期"),
     TOKEN_ERROR(407,"身份信息错误"),
-    LOGOUT(408,"退出成功"),
+    LOGOUT(200,"退出成功"),
     ;
 
     private final Integer code;
