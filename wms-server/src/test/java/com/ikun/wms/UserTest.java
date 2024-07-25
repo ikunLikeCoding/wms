@@ -47,10 +47,9 @@ public class UserTest {
 
     @Test
     public void testGetRoleList() {
-        Role role = new Role();
-        role.setRoleId(1);
-        List<AuthInfo> permissionListByRoleName = userRoleMapper.getPermissionListByRoleId(List.of(role));
-        System.out.println(permissionListByRoleName);
+        List<Role> roleListByUserId = userRoleMapper.getRoleListByUserId(4);
+
+        System.out.println(roleListByUserId);
     }
 
 }

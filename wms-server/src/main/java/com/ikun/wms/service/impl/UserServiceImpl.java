@@ -55,7 +55,9 @@ public class UserServiceImpl extends ServiceImpl<UserInfoMapper, User>
 
         //获取角色列表
         List<Role> roles =userRoleMapper.getRoleListByUserId(user.getUserId());
-        List<String> roleList = roles.stream().map(Role::getRoleName).toList();
+        List<String> roleList = roles.stream().map(role->{
+            return role.getRoleName();
+        }).toList();
         user.setRoleList(roleList);
 
         //获取权限列表
