@@ -21,7 +21,7 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="close">取消</el-button>
-        <el-button type="primary" @click="updatePurchase">确定</el-button>
+        <el-button v-permission="'order-updateDetils'" type="primary" @click="updatePurchase">确定</el-button>
       </span>
     </template>
   </el-dialog>

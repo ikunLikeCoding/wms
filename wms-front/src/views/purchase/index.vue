@@ -54,9 +54,9 @@
     </el-table-column>
     <el-table-column label="操作">
       <template #default="props">
-        <el-button v-if="!props.row.factBuyNum || props.row.factBuyNum==0" type="primary" title="修改采购单" :icon="Edit" circle @click="openPurchaseUpdate(props.row)" />
-        <el-button v-if="!props.row.factBuyNum || props.row.factBuyNum==0" type="danger" title="删除采购单" :icon="Delete" circle @click="deletePurchase(props.row.buyId)" />
-        <el-button v-if="props.row.isIn==0 && props.row.factBuyNum>0" type="primary" @click="instore(props.row)">生成入库单</el-button>
+        <el-button v-permission="'update-order'" v-if="!props.row.factBuyNum || props.row.factBuyNum==0" type="primary" title="修改采购单" :icon="Edit" circle @click="openPurchaseUpdate(props.row)" />
+        <el-button v-permission="'delete-order'" v-if="!props.row.factBuyNum || props.row.factBuyNum==0" type="danger" title="删除采购单" :icon="Delete" circle @click="deletePurchase(props.row.buyId)" />
+        <el-button v-permission="'update-order'" v-if="props.row.isIn==0 && props.row.factBuyNum>0" type="primary" @click="instore(props.row)">生成入库单</el-button>
       </template>
     </el-table-column>
   </el-table>

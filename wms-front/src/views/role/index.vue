@@ -1,6 +1,6 @@
 <template>
     <div>
-      <el-form class="searchForm">
+      <el-form v-permission="'role-findRole'" class="searchForm">
         <el-form-item>
           <el-input v-model="params.roleName" placeholder="角色名" style="width: 120px;"  clearable></el-input>
         </el-form-item>
@@ -23,7 +23,7 @@
         </el-form-item>
       </el-form>
       <div>
-        <el-button type="primary" @click="openRoleAdd">
+        <el-button v-permission="'role-addRole'" type="primary" @click="openRoleAdd">
           <el-icon>
             <svg t="1646977404025" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2197" width="200" height="200"><path d="M925.696 384q19.456 0 37.376 7.68t30.72 20.48 20.48 30.72 7.68 37.376q0 20.48-7.68 37.888t-20.48 30.208-30.72 20.48-37.376 7.68l-287.744 0 0 287.744q0 20.48-7.68 37.888t-20.48 30.208-30.72 20.48-37.376 7.68q-20.48 0-37.888-7.68t-30.208-20.48-20.48-30.208-7.68-37.888l0-287.744-287.744 0q-20.48 0-37.888-7.68t-30.208-20.48-20.48-30.208-7.68-37.888q0-19.456 7.68-37.376t20.48-30.72 30.208-20.48 37.888-7.68l287.744 0 0-287.744q0-19.456 7.68-37.376t20.48-30.72 30.208-20.48 37.888-7.68q39.936 0 68.096 28.16t28.16 68.096l0 287.744 287.744 0z" p-id="2198"></path></svg>
           </el-icon>
@@ -39,7 +39,7 @@
       <el-table-column prop="roleName" label="角色名" sortable />
       <el-table-column prop="roleDesc" label="角色描述" />
       <el-table-column prop="roleCode" label="角色代码" sortable />
-      <el-table-column label="状态" sortable>
+      <el-table-column v-permission="'role-updateState'" label="状态" sortable>
         <template #default="props">
             <span :class="{red:props.row.roleState=='0'}">{{props.row.roleState=="0"?"禁用":"启用"}}</span>
         </template>
@@ -70,10 +70,10 @@
     />
 
     <!-- 添加角色对话框 -->
-    <role-add ref="roleAddRef" @ok="getRoleList"></role-add>
+    <role-add v-permission="'role-addRole'"  ref="roleAddRef" @ok="getRoleList"></role-add>
 
     <!-- 修改角色对话框 -->
-    <role-update ref="roleUpdateRef" @ok="getRoleList"></role-update>
+    <role-update v-permission="'role-updateRole'"  ref="roleUpdateRef" @ok="getRoleList"></role-update>
 
 </template>
 

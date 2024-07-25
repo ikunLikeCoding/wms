@@ -1,4 +1,5 @@
 <template>
+  <h1>aaa</h1>
   <div style="padding-bottom: 20px;">
     <el-button type="primary" @click="openAuthAdd">添加权限</el-button>
     <el-button type="primary" @click="openAuthUpdate">修改权限</el-button>

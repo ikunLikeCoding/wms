@@ -47,7 +47,7 @@
     <el-table-column prop="createTime" label="创建时间" sortable />
     <el-table-column label="操作">
       <template #default="props">
-        <el-button v-if="props.row.isIn==0" type="primary" title="确定入库" @click="confirmInstore(props.row)"
+        <el-button v-permission="'instore-confirm'" v-if="props.row.isIn==0" type="primary" title="确定入库" @click="confirmInstore(props.row)"
                    :key="props.row.insId">确定入库</el-button>
       </template>
     </el-table-column>

@@ -47,7 +47,7 @@
     </el-table-column>
     <el-table-column prop="createName" label="调货人" sortable />
     <el-table-column prop="createTime" label="调货时间" sortable />
-    <el-table-column label="操作">
+    <el-table-column label="操作" v-permission="'transshipment-confirm'">
       <template #default="props">
         <el-button v-if="props.row.auditState==0" type="primary" @click="confirmTransshipment(props.row)">确认调货</el-button>
       </template>

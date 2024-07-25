@@ -1,7 +1,7 @@
 <template>
   <!-- 商品列表 -->
   <div>
-    <el-form class="searchForm">
+    <el-form v-permission="'select_product'" class="searchForm">
       <el-form-item>
         <el-select v-model="params.storeId" style="width: 120px;" clearable>
           <el-option v-for="store of storeList" :label="store.storeName" :value="store.storeId" :key="store.storeId"></el-option>
@@ -51,14 +51,14 @@
       </el-form-item>
     </el-form>
     <div>
-      <el-button type="primary" @click="openCommodityAdd()">
+      <el-button v-permission="'product-add'" type="primary" @click="openCommodityAdd()">
         <el-icon>
           <svg t="1646977404025" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2197" width="200" height="200"><path d="M925.696 384q19.456 0 37.376 7.68t30.72 20.48 20.48 30.72 7.68 37.376q0 20.48-7.68 37.888t-20.48 30.208-30.72 20.48-37.376 7.68l-287.744 0 0 287.744q0 20.48-7.68 37.888t-20.48 30.208-30.72 20.48-37.376 7.68q-20.48 0-37.888-7.68t-30.208-20.48-20.48-30.208-7.68-37.888l0-287.744-287.744 0q-20.48 0-37.888-7.68t-30.208-20.48-20.48-30.208-7.68-37.888q0-19.456 7.68-37.376t20.48-30.72 30.208-20.48 37.888-7.68l287.744 0 0-287.744q0-19.456 7.68-37.376t20.48-30.72 30.208-20.48 37.888-7.68q39.936 0 68.096 28.16t28.16 68.096l0 287.744 287.744 0z" p-id="2198"></path></svg>
         </el-icon>
         &nbsp;添加商品
       </el-button>
 
-      <el-button type="primary" @click="transferCommodity">调货</el-button>
+      <el-button v-permission="'product-add'" type="primary" @click="transferCommodity">调货</el-button>
       <el-select placeholder="批量操作" style="width: 110px;margin-left: 12px; position: relative; top: 2px;">
         <el-option @click="deleteCommodityList">
           <span style="float: left;">

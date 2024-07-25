@@ -1,7 +1,7 @@
 <template>
     <el-form inline>
-      <el-form-item label="用户名:">
-        <el-input v-model="params.userName" placeholder="用户名" style="width: 120px;"  clearable></el-input>
+      <el-form-item label="昵称:">
+        <el-input v-model="params.userName" placeholder="昵称" style="width: 120px;"  clearable></el-input>
       </el-form-item>
       <el-form-item label="用户类型:" style="margin-left: 30px;">
         <el-select v-model="params.roleId" placeholder="用户类型" style="width: 120px;" clearable>

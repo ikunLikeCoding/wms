@@ -22,7 +22,6 @@ app.directive('permission', (el, binding)=>{
         permission:binding.value
     }).then((res)=>{
         if(res.data === true){
-            console.log("权限通过")
             return;
         }else {
             el.style.display = 'none';
