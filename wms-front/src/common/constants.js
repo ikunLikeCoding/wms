@@ -1,6 +1,5 @@
 /**
  * 常量定义
- * 作者：王坤 2022-03
  */
 export const VERSION = import.meta.env.VITE_VERSION;
 export const BASE_URL = import.meta.env.BASE_URL;

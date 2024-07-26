@@ -1,6 +1,5 @@
 /**
  * 加载提示
- * 作者：王坤
  */
 
 import { createApp } from 'vue';

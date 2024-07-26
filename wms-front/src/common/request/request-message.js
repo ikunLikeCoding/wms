@@ -1,6 +1,5 @@
 /**
  * 消息框
- * 作者：王坤
  */
 
 import { ElMessage, ElMessageBox } from 'element-plus'
