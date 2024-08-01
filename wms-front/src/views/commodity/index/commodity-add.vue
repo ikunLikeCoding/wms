@@ -43,31 +43,31 @@
       </el-row>
       <el-row>
           <el-form-item label="品牌：" prop="brandId">
-            <el-select placeholder="请选择品牌" v-model="commodityAdd.brandId" clearable>
+            <el-select placeholder="请选择品牌" style="width: 200px;" v-model="commodityAdd.brandId" clearable>
               <el-option v-for="brand of brands" :label="brand.brandName" :value="brand.brandId" :key="brand.brandId"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="仓库：" prop="storeId">
-            <el-select placeholder="请选择仓库" v-model="commodityAdd.storeId" clearable>
+            <el-select style="width: 200px;" placeholder="请选择仓库" v-model="commodityAdd.storeId" clearable>
               <el-option v-for="store of stores" :label="store.storeName" :value="store.storeId" :key="store.storeId"></el-option>
             </el-select>
           </el-form-item>
       </el-row>
       <el-row>
         <el-form-item label="供应商：" prop="supplyId">
-          <el-select placeholder="请选择供应商" v-model="commodityAdd.supplyId" clearable>
+          <el-select style="width: 200px;" placeholder="请选择供应商" v-model="commodityAdd.supplyId" clearable>
             <el-option v-for="supply of supplys" :label="supply.supplyName" :value="supply.supplyId" :key="supply.supplyId"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="产地：" prop="placeId">
-          <el-select placeholder="请选择产地" v-model="commodityAdd.placeId" clearable>
+          <el-select style="width: 200px;" placeholder="请选择产地" v-model="commodityAdd.placeId" clearable>
             <el-option v-for="place of places" :label="place.placeName" :value="place.placeId" :key="place.placeId"></el-option>
           </el-select>
         </el-form-item>
       </el-row>
       <el-row>
         <el-form-item label="单位：" prop="unitId">
-          <el-select placeholder="请选择单位" v-model="commodityAdd.unitId" clearable>
+          <el-select style="width: 200px;" placeholder="请选择单位" v-model="commodityAdd.unitId" clearable>
             <el-option v-for="unit of units" :label="unit.unitName" :value="unit.unitId" :key="unit.unitId"></el-option>
           </el-select>
         </el-form-item>
