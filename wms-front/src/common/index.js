@@ -1,6 +1,5 @@
 /**
  * common统一对外接口
- * 作者：王坤 2022-03
  */
 
 export { VERSION, BASE_URL, API_BASE_URL } from './constants'

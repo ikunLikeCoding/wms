@@ -1,6 +1,5 @@
 /**
  * token本存储
- * 作者：王坤 2022-03
  */
 
 import { LOCAL_TOKEN } from "./constants.js"

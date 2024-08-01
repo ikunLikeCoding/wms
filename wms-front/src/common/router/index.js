@@ -1,6 +1,5 @@
 /**
  * 路由
- * 作者：王坤
  */
 
 import { createRouter, createWebHistory } from 'vue-router'

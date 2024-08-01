@@ -10,7 +10,7 @@
           font-weight: bold;
           letter-spacing: 3px;
         "
-      >恒合仓库管理系统
+      >IKUN仓库管理系统
       </div>
       <el-form
         ref="loginForm"
@@ -144,7 +144,7 @@ const login = () => {
 .login {
 
   background-size: 100% 100%;
-
+  background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
   position: fixed;
   top: 0px;
   bottom: 0px;
